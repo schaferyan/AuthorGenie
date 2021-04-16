@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">AuthorGenie</string>
+    <string name="minutes">minutes</string>
+    <string name="words">words</string>
+    <string name="inspirational_reminder_text">\"Inspirational reminder text\"</string>
+    <string name="update_progress_here">update progress</string>
+    <string name="view_goals">View Goals</string>
+    <string name="action_settings">Settings</string>
+    <string name="submit">Add Goal</string>
+    <string name="cancel">Cancel</string>
+    <string name="new_goal_dialog_title">Add a Goal</string>
+    <string name="dialog_enter_a_goal">enter goal</string>
+    <string name="invalid_input">Invalid input</string>
+    <string name="overwrite_warning">You already have a goal of this type</string>
+    <string name="overwrite_check">Overwrite existing goal</string>
+    <string name="add_goal">Set a new goal…</string>
+    <string name="hint_new_goal">enter a goal</string>
+    <string name="add_a_goal">add a goal</string>
+    <string name="empty_progress_nums">00/00</string>
+    <string name="goal_label">goal label placeholder</string>
+    <string name="goal_label_placeholder">goal label placeholder</string>
+    <string name="date_placeholder">date placeholder</string>
+    <string name="goal_numbers_placeholder">00/00</string>
+</resources>
