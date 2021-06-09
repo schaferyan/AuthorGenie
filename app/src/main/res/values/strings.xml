@@ -21,4 +21,25 @@
     <string name="goal_label_placeholder">goal label placeholder</string>
     <string name="date_placeholder">date placeholder</string>
     <string name="goal_numbers_placeholder">00/00</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="OK">OK</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="update">Update</string>
+    <string name="link_to_website_text"><a href="http://www.authorgenie.net">Stuck? Get an AuthorGenie boost</a></string>
+    <string name="about">About</string>
+    <string name="about_section">
+        Coded in Java
+        \n Icons from Icon8
+        \n App created by Ryan Schafer
+        \n For more information about AuthorGenie, visit <a href= "http://www.authorgenie.net">authorgenie.net</a>
+    </string>
+    <string name="author_genie_lamp_logo">Author Genie Lamp Logo</string>
+    <string name="authorgenie_lamp_icon">AuthorGenie lamp icon</string>
+    <array name="inspire_text">
+        <item>Setting a goal is the first step</item>
+        <item>Make a wish</item>
+        <item>Pick up your pen and start writing</item>
+        <item>You can do it</item>
+    </array>
 </resources>

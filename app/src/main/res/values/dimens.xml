@@ -4,6 +4,9 @@
     <dimen name="min_height">12dp</dimen>
     <dimen name="big_padding">16dp</dimen>
     <dimen name="smallPadding">8dp</dimen>
+    <dimen name="hugeMargin">32dp</dimen>
     <dimen name="big_margin">16dp</dimen>
     <dimen name="small_margin">8dp</dimen>
+    <dimen name="huge_padding">32dp</dimen>
+    <dimen name="tiny_margin">4dp</dimen>
 </resources>

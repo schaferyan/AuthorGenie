@@ -3,20 +3,19 @@
     package="com.ryanschafer.authorgenie3">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.AuthorGenie3">
         <receiver
-            android:name=".main.AlarmReceiver"
+            android:name=".background.AlarmReceiver"
             android:enabled="true"
-            android:exported="false"></receiver>
+            android:exported="false" />
 
-        <activity android:name=".NewGoalActivity" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

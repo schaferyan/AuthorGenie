@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/recyclerview_item_background">
+
+    <TextView
+        android:id="@+id/progressNumbersRecyclerview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:text="@string/goal_numbers_placeholder"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="54sp"
+        android:layout_marginRight="@dimen/big_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <RelativeLayout
+        android:layout_marginVertical="@dimen/small_margin"
+        android:id="@+id/progressFrame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/hugeMargin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/goalLabelRecyclerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/goal_label_placeholder"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="42sp"
+            android:textColor="@color/design_default_color_on_secondary"
+            android:layout_marginVertical="@dimen/tiny_margin"
+            />
+
+        <ProgressBar
+            android:id="@+id/progBarRecyclerview"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="350dp"
+            android:layout_height="15dp"
+            android:layout_below="@id/goalLabelRecyclerview"
+            android:progressDrawable="@drawable/progressbar"
+            android:layout_marginVertical="@dimen/tiny_margin"
+            />
+
+
+        <TextView
+            android:id="@+id/goalDateRecyclerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progBarRecyclerview"
+            android:text="@string/date_placeholder"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="24sp"
+            android:layout_marginVertical="@dimen/tiny_margin"/>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

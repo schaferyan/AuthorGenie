@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
+    android:background="@drawable/triangle_background"
+    tools:context=".ui.main.ProgressInputFragment">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/big_margin"
+        android:padding="@dimen/big_padding"
+        android:text="@string/inspirational_reminder_text"
+        style="@style/tipsAndQuotesText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/big_margin"
+        android:orientation="vertical"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="0dp"
+            >
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:background="@drawable/progress_input_background">
+            <EditText
+                android:id="@+id/enter_progress_editText"
+                android:layout_width="145dp"
+                android:layout_height="50dp"
+                android:hint="@string/update_progress_here"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:padding="@dimen/smallPadding"
+                android:textColorHint="@color/black"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:background="@drawable/progress_input_background">
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
+                tools:layout_editor_absoluteX="232dp"
+                tools:layout_editor_absoluteY="579dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addProgressButton"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/update"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            tools:layout_editor_absoluteX="72dp"
+            tools:layout_editor_absoluteY="627dp" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
