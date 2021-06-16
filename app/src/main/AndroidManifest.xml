@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ryanschafer.authorgenie3">
+    package="com.ryanschafer.authorgenie">
 
     <application
         android:allowBackup="false"
@@ -10,12 +10,12 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.AuthorGenie3">
         <receiver
-            android:name=".background.AlarmReceiver"
+            android:name="com.ryanschafer.authorgenie.background.AlarmReceiver"
             android:enabled="true"
             android:exported="false" />
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.ryanschafer.authorgenie.ui.main.MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

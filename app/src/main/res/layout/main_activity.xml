@@ -37,7 +37,7 @@
             />
     </androidx.appcompat.widget.Toolbar>
 
-    <com.ryanschafer.authorgenie3.ui.main.TextViewCarousel
+    <com.ryanschafer.authorgenie.ui.main.TextViewCarousel
         android:id="@+id/header"
         style="@style/tipsAndQuotesText"
         android:layout_width="wrap_content"
