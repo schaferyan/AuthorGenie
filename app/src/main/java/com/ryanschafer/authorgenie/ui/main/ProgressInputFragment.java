@@ -166,5 +166,6 @@ public class ProgressInputFragment extends Fragment {
         mediaPlayer.setVolume(0.5f,0.5f);
         audioManager = (AudioManager) requireActivity().getSystemService(Context.AUDIO_SERVICE);
         mediaPlayer.start();
+        mediaPlayer.release();
     }
 }

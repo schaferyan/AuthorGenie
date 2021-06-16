@@ -70,6 +70,7 @@
         android:gravity="center"
         android:text="@string/link_to_website_text"
         android:textColor="@color/white"
+        android:textSize="32sp"
         android:clickable="true"
         android:focusable="true"
         android:layout_marginBottom="@dimen/big_margin"

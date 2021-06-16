@@ -117,6 +117,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        TextView linkTextView = binding.footer;
+        linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        linkTextView.setLinkTextColor(ContextCompat.getColor(this, R.color.white));
+
     }
 
     @Override
@@ -124,10 +128,8 @@ public class MainActivity extends AppCompatActivity {
         super.onAttachedToWindow();
         Window window = getWindow();
         WindowCompat.setDecorFitsSystemWindows(window, false);
-        TextView linkTextView = binding.footer;
-        linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        linkTextView.setLinkTextColor(ContextCompat.getColor(this, R.color.white));
-        ViewCompat.setOnApplyWindowInsetsListener(linkTextView, (v, insets) -> {
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.footer, (v, insets) -> {
             int addPadding = 8 + insets.getInsets(WindowInsetsCompat.Type.systemGestures()).bottom
                     + insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom;
             v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(),

@@ -10,7 +10,6 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
-import com.ryanschafer.authorgenie.background.GoalNotification;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.ui.main.MainActivity;
 
@@ -101,6 +100,7 @@ public class NotificationRepository {
                             .setPriority(NotificationCompat.PRIORITY_HIGH)
                             .setAutoCancel(true)
                             .setGroup(NOTIFICATION_GROUP_ID_GOAL_REMINDERS)
+                            .setTimeoutAfter(TimeUnit.DAYS.toMillis(1/2))
                             .setDefaults(NotificationCompat.DEFAULT_ALL);
                     mNotificationManager.notify(NOTIFICATION_ID, builder.build());
                 }

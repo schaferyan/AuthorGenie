@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.background;
+package com.ryanschafer.authorgenie.datamodel;
 
 public class GoalNotification {
 
