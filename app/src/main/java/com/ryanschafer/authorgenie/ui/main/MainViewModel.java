@@ -52,4 +52,7 @@ public class MainViewModel extends AndroidViewModel {
         return goalRepository.getUnannouncedMetGoals();
     }
 
+    public void setGoalNotified(Goal goal, boolean b) {
+        goalRepository.setGoalNotified(goal, b);
+    }
 }

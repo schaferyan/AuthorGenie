@@ -53,11 +53,6 @@ public class GoalRepository {
         GoalDatabase.dbWriteExecutor.execute(()-> goalDao.delete(goal));
     }
 
-    public void removeGoal(int goalType){
-        activeGoalsMap.remove(goalType);
-        GoalDatabase.dbWriteExecutor.execute(()-> goalDao.delete(findGoalById(goalType)));
-    }
-
     public void updateAllProgress(int progress, Goal.TYPE progressType){
         for(Goal goal : activeGoalsMap.values()){
             if(goal.getType() == progressType){
@@ -90,10 +85,6 @@ public class GoalRepository {
         return goals;
     }
 
-    public LiveData<Goal> getCurrentGoalByName(String name){
-        return goalDao.getCurrentGoalByName(name);
-    }
-
     public List<Goal> getUnannouncedMetGoals() {
         List<Goal> metGoals = new ArrayList<>();
         for(Goal goal : activeGoalsMap.values()){
@@ -106,6 +97,11 @@ public class GoalRepository {
     }
 
 
-
-
+    public void setGoalNotified(Goal goal, boolean b) {
+        Goal updatedGoal = activeGoalsMap.get(goal.getGoalTypeId());
+        if (updatedGoal != null) {
+            updatedGoal.setNotified(b);
+        }
+        GoalDatabase.dbWriteExecutor.execute(()-> goalDao.update(updatedGoal));
+    }
 }

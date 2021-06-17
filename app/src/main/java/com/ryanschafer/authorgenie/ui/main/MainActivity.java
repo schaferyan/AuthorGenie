@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("RESUME", "onResume called in activity, now executing code");
+
         mHandlerThread = new GoalStatusHandlerThread("handler-thread", mViewModel, this);
         mHandlerThread.start();
         cycleText();
@@ -201,10 +201,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.actionbar_add) {
             showAddGoalFragment();
             return true;
-        } else if (item.getItemId() == R.id.action_settings) {
-            openSettings();
-            return true;
-        }else if(item.getItemId() == R.id.action_about){
+        } else if(item.getItemId() == R.id.action_about){
            showAbout();
         }
         return super.onOptionsItemSelected(item);
@@ -221,9 +218,6 @@ public class MainActivity extends AppCompatActivity {
         setShowFooter(false);
     }
 
-    private void openSettings() {
-    }
-
     public void showDashboardFragment(){
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,
                 MainFragment.newInstance()).commitNow();
@@ -234,13 +228,14 @@ public class MainActivity extends AppCompatActivity {
         if(mAddGoalFragment == null){
             mAddGoalFragment = AddGoalFragment.newInstance();
         }
+        setShowFooter(false);
+        setShowHeader(false);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_fragment_container,
                 mAddGoalFragment);
         transaction.addToBackStack(null);
         transaction.commit();
         getSupportFragmentManager().executePendingTransactions();
-        setShowFooter(false);
     }
 
     public void showFirstTimeDialog(){

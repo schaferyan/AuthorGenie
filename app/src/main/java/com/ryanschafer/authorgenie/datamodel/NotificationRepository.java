@@ -53,7 +53,7 @@ public class NotificationRepository {
                 switch (typeId){
                     case Goal.DAY_WORD:
                     case Goal.DAY_TIME:
-                        if(currentTime1 - lastUsed > TimeUnit.DAYS.toMillis(1)/2) {
+                        if(currentTime1 - lastUsed > TimeUnit.HOURS.toMillis(2)) {
                             title = "Have you written today?";
                             message = "Don't forget to enter your progress!";
                             notifications[0] = new GoalNotification(title, message);

@@ -1,11 +1,8 @@
 package com.ryanschafer.authorgenie.ui.main;
 
 import android.app.Activity;
-import android.content.Context;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -40,7 +37,6 @@ public class ProgressInputFragment extends Fragment {
     ArrayAdapter<String> spinnerAdapter;
     Button submitButton;
     Spinner spinner;
-    AudioManager audioManager;
     MediaPlayer mediaPlayer;
 
 
@@ -53,7 +49,6 @@ public class ProgressInputFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
     @Nullable
     @Override
@@ -74,63 +69,50 @@ public class ProgressInputFragment extends Fragment {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.actionbar_add) {
-            addProgress();
-            return true;
-        }
-        else if (item.getItemId() == R.id.action_settings) {
-            openSettings();
+            ((MainActivity) requireActivity()).showAddGoalFragment();
             return true;
         }
         return super.onOptionsItemSelected(item);
-
-
-    }
-
-    private void openSettings() {
     }
 
     private void addProgress() {
         EditText editText = binding.enterProgressEditText;
-        Goal.TYPE inputType = Goal.TYPE.values()[spinner.getSelectedItemPosition()];
-        String message = null;
-
-
-            String progressStr = editText.getText().toString();
-            int progress = 0;
+        String progressStr = editText.getText().toString();
+        int progress;
         try {
             progress = Integer.parseInt(progressStr);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            Log.d("SUBMITTING PROGRESS", "Failed to submit progress, number format exception");
+        } catch (NumberFormatException  | NullPointerException e) {
+            Toast.makeText(requireContext(), "You must enter a number to submit progress", Toast.LENGTH_LONG).show();
+            return;
         }
+        Goal.TYPE inputType = Goal.TYPE.values()[spinner.getSelectedItemPosition()];
+        String message = null;
+        int[] sounds = new int[2];
+
+
+
+
         if(progress != 0) {
-            playSound(getContext(), R.raw.tinkle);
+            sounds[0] = R.raw.tinkle;
         }
             mViewModel.addProgress(progress, inputType);
             List<Goal> metGoals = mViewModel.getUnannouncedMetGoals();
 
             if(!metGoals.isEmpty()){
-                playSound(getContext(), R.raw.choir);
-
-                if(metGoals.size() > 1){
-                    message = "Congratulations! You met your goals!";
-                }else{
-                    message = "Congratulations! You met your goal!";
-                }
+                sounds[1] = R.raw.success;
+                message = "Success!";
                 for(Goal goal: metGoals){
-                    goal.setNotified(true);
-                    mViewModel.overwriteGoal(goal);
+                    mViewModel.setGoalNotified(goal, true);
                 }
             }
             if(message != null) {
                 Toast.makeText(getContext(),
                         message, Toast.LENGTH_LONG).show();
             }
-
-
-
         editText.setText("");
         editText.clearFocus();
+
+        playSounds(sounds);
 
     }
 
@@ -161,11 +143,23 @@ public class ProgressInputFragment extends Fragment {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public void playSound(Context context, int resId){
-        mediaPlayer = MediaPlayer.create(context, resId);
-        mediaPlayer.setVolume(0.5f,0.5f);
-        audioManager = (AudioManager) requireActivity().getSystemService(Context.AUDIO_SERVICE);
+    public void playSounds(int[] sounds){
+        MediaPlayer mediaPlayer = MediaPlayer.create(requireContext(), sounds[0]);
+        mediaPlayer.setOnCompletionListener(MediaPlayer::release);
         mediaPlayer.start();
-        mediaPlayer.release();
+        if(sounds[1] != 0) {
+            MediaPlayer mediaPlayer2 = MediaPlayer.create(requireContext(), sounds[1]);
+            mediaPlayer2.setOnCompletionListener(MediaPlayer::release);
+            mediaPlayer2.start();
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mediaPlayer != null) {
+            mediaPlayer.release();
+        }
     }
 }

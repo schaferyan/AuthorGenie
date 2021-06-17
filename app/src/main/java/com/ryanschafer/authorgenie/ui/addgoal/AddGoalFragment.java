@@ -161,5 +161,6 @@ public class AddGoalFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         ((MainActivity) requireActivity()).setShowFooter(true);
+        ((MainActivity) requireActivity()).setShowHeader(true);
     }
 }

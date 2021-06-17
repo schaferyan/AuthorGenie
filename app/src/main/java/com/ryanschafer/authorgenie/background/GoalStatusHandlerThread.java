@@ -35,7 +35,7 @@ public class GoalStatusHandlerThread extends HandlerThread {
                     String message = null;
                     List<Goal> goalsEnded = mViewModel.getFinishedGoals();
                     for (Goal goal : goalsEnded) {
-                        if (goal.isMet() && goal.getProgress() > goal.getObjective()) {
+                        if (goal.getProgress() > goal.getObjective()) {
                             message = "You exceeded your goal by " + (goal.getProgress() -
                                     goal.getObjective()) + "!";
                         } else if (goal.isMet()) {

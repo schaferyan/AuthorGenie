@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icons8_magic_lamp_48"
+            android:src="@drawable/lamp_icon_60"
             android:contentDescription="@string/author_genie_lamp_logo" />
         <TextView
             android:id="@+id/custom_title"
