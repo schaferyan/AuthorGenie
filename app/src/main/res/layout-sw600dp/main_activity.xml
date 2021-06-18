@@ -17,13 +17,13 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/purple_200"
         >
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icons8_magic_lamp_48"
-            />
+            android:src="@drawable/lamp_icon_128"
+            android:contentDescription="@string/magic_lamp_icon" />
         <TextView
             android:id="@+id/custom_title"
             android:text="@string/app_name"
@@ -76,6 +76,17 @@
         android:layout_marginBottom="@dimen/big_margin"
         />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addGoalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/add_a_goal"
+        android:focusable="true"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_outline_add_24"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
 
 
 </RelativeLayout>

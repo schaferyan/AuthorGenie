@@ -3,7 +3,6 @@ package com.ryanschafer.authorgenie.background;
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.ryanschafer.authorgenie.datamodel.Goal;
@@ -47,7 +46,6 @@ public class GoalStatusHandlerThread extends HandlerThread {
                         }
                         mViewModel.addGoal(new Goal(goal.getObjective(), goal.getGoalTypeId()));
                     }
-                    Log.d("Handlers", "Called on handler thread");
                     handler.postDelayed(this, TimeUnit.MINUTES.toMillis(1));
                 }
             }

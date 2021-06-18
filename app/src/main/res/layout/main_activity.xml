@@ -17,7 +17,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/purple_200"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:textAlignment="textStart"
             android:textStyle="bold"
             android:fontFamily="Sans Serif"
-            android:textColor="@color/dark_blue"
+            android:textColor="@color/black"
             />
     </androidx.appcompat.widget.Toolbar>
 
@@ -41,15 +41,14 @@
         android:id="@+id/header"
         style="@style/tipsAndQuotesText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
+        android:layout_height="75dp"
+        android:maxWidth="325dp"
         android:padding="@dimen/big_padding"
+        android:layout_marginTop="@dimen/small_margin"
         android:text="@string/inspirational_reminder_text"
         android:layout_below="@+id/toolbar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-         />
+        android:layout_centerInParent="true"
+        />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_fragment_container"
@@ -68,11 +67,22 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/link_to_website_text"
-        android:textColor="@color/white"
+        android:textColor="@color/purple_200"
         android:clickable="true"
         android:focusable="true"
         android:paddingBottom="16dp"
         />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addGoalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/add_a_goal"
+        android:focusable="true"
+        android:src="@drawable/ic_outline_add_24"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true" />
 
 
 </RelativeLayout>

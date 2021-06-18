@@ -32,13 +32,15 @@ public class GoalRepository {
     }
 
     public boolean addGoal(@NotNull Goal goal){
-        if(activeGoalsMap.containsKey(goal.getGoalTypeId())){
-            return false;
-        }else{
-            activeGoalsMap.put(goal.getGoalTypeId(), goal);
-            GoalDatabase.dbWriteExecutor.execute(()-> goalDao.insert(goal));
+        synchronized (activeGoalsMap) {
+            if (activeGoalsMap.containsKey(goal.getGoalTypeId())) {
+                return false;
+            } else {
+                activeGoalsMap.put(goal.getGoalTypeId(), goal);
+                GoalDatabase.dbWriteExecutor.execute(() -> goalDao.insert(goal));
 
-            return true;
+                return true;
+            }
         }
     }
     public void replaceGoal(Goal newGoal) {
@@ -54,20 +56,24 @@ public class GoalRepository {
     }
 
     public void updateAllProgress(int progress, Goal.TYPE progressType){
-        for(Goal goal : activeGoalsMap.values()){
-            if(goal.getType() == progressType){
-                goal.addProgress(progress);
-                GoalDatabase.dbWriteExecutor.execute(()-> goalDao.update(goal));
+        synchronized (activeGoalsMap) {
+            for (Goal goal : activeGoalsMap.values()) {
+                if (goal.getType() == progressType) {
+                    goal.addProgress(progress);
+                    GoalDatabase.dbWriteExecutor.execute(() -> goalDao.update(goal));
+                }
             }
         }
     }
 
     public List<Goal> getFinishedGoals(){
         List<Goal> goalsEnded = new ArrayList<>();
-        for(Goal goal : activeGoalsMap.values()){
-            if (!goal.isCurrent()){
-                GoalDatabase.dbWriteExecutor.execute(()-> goalDao.update(goal));
-                goalsEnded.add(goal);
+        synchronized (activeGoalsMap) {
+            for (Goal goal : activeGoalsMap.values()) {
+                if (!goal.isCurrent()) {
+                    GoalDatabase.dbWriteExecutor.execute(() -> goalDao.update(goal));
+                    goalsEnded.add(goal);
+                }
             }
         }
         for(Goal goal: goalsEnded){
@@ -87,10 +93,12 @@ public class GoalRepository {
 
     public List<Goal> getUnannouncedMetGoals() {
         List<Goal> metGoals = new ArrayList<>();
-        for(Goal goal : activeGoalsMap.values()){
-            if (goal.isMet() && !goal.isNotified()){
-                GoalDatabase.dbWriteExecutor.execute(()-> goalDao.update(goal));
-                metGoals.add(goal);
+        synchronized (activeGoalsMap) {
+            for (Goal goal : activeGoalsMap.values()) {
+                if (goal.isMet() && !goal.isNotified()) {
+                    GoalDatabase.dbWriteExecutor.execute(() -> goalDao.update(goal));
+                    metGoals.add(goal);
+                }
             }
         }
         return metGoals;

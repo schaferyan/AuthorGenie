@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("OnCreate", "OnCreate was called");
 
         binding = MainActivityBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
@@ -88,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
             mAddGoalFragment = (AddGoalFragment) getSupportFragmentManager().getFragment(savedInstanceState, "AddGoalFragment");
             if(mAddGoalFragment!=null){
-                Log.d("Checking Fragment", "Fragment was successfully saved");
               showAddGoalFragment();
             }
         }
@@ -119,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView linkTextView = binding.footer;
         linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        linkTextView.setLinkTextColor(ContextCompat.getColor(this, R.color.white));
+        linkTextView.setLinkTextColor(ContextCompat.getColor(this, R.color.purple_200));
+        binding.addGoalButton.setOnClickListener( v -> showAddGoalFragment());
 
     }
 
@@ -148,8 +147,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void scheduleAlarms() {
-
-        Log.d("NOTIFICATIONS","scheduling alarms");
         Intent notifyIntent = new Intent(this, AlarmReceiver.class);
         mNotifyInit = PendingIntent.getBroadcast(this, NOTIFICATION_ID, notifyIntent,
                 PendingIntent.FLAG_NO_CREATE) != null;
@@ -216,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().executePendingTransactions();
         setShowHeader(false);
         setShowFooter(false);
+        setShowAddButton(false);
     }
 
     public void showDashboardFragment(){
@@ -224,12 +222,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showAddGoalFragment() {
-        Log.d("SHOW_ADD_GOAL", "should be showing add goal fragment");
         if(mAddGoalFragment == null){
             mAddGoalFragment = AddGoalFragment.newInstance();
         }
         setShowFooter(false);
         setShowHeader(false);
+        setShowAddButton(false);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_fragment_container,
                 mAddGoalFragment);
@@ -284,6 +282,14 @@ public class MainActivity extends AppCompatActivity {
             textView.setVisibility(View.VISIBLE);
         }else{
             textView.setVisibility(View.GONE);
+        }
+    }
+    public void setShowAddButton(boolean show) {
+        View button = binding.addGoalButton;
+        if (show) {
+            button.setVisibility(View.VISIBLE);
+        } else {
+            button.setVisibility(View.GONE);
         }
     }
 

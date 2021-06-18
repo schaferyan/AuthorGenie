@@ -64,5 +64,6 @@ public class About extends Fragment {
         super.onDestroy();
         ((MainActivity) requireActivity()).setShowHeader(true);
         ((MainActivity) requireActivity()).setShowFooter(true);
+        ((MainActivity) requireActivity()).setShowAddButton(true);
     }
 }

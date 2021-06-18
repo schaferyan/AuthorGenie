@@ -68,7 +68,7 @@ public class RecyclerviewFragment extends Fragment {
             adapter.setCachedItems(goals);
         });
 
-        binding.addGoalButton.setOnClickListener( v -> ((MainActivity) requireActivity()).showAddGoalFragment());
+
     }
 
 

@@ -6,7 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
+import androidx.core.app.NotificationCompat;
 
 import androidx.core.app.NotificationCompat;
 
@@ -48,7 +48,6 @@ public class NotificationRepository {
             String title;
             String message;
             for(Goal goal : currentGoals){
-                Log.d("LOOPING","looping through goals");
                 int typeId = goal.getGoalTypeId();
                 switch (typeId){
                     case Goal.DAY_WORD:
