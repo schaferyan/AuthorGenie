@@ -291,9 +291,8 @@ public class Goal {
     }
 
 
-//    @RequiresApi(api = Build.VERSION_CODES.N)
+
     public static List<String> getDurations(){
-//        return Stream.of(Goal.DURATION.values()).map(Enum::toString).collect(Collectors.toList());
         List<String> durations = new ArrayList<>();
         for(Goal.DURATION duration : Goal.DURATION.values()){
             durations.add(duration.toString());
@@ -301,9 +300,8 @@ public class Goal {
         return durations;
     }
 
-//    @RequiresApi(api = Build.VERSION_CODES.N)
+
     public static List<String> getGoalTypes(){
-//        return Stream.of(Goal.TYPE.values()).map(Enum::toString).collect(Collectors.toList());
         List<String> types = new ArrayList<>();
         for(Goal.TYPE type : Goal.TYPE.values()){
             types.add(type.toString());

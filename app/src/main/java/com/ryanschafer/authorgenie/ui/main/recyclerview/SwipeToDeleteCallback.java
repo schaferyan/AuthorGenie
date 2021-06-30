@@ -18,7 +18,7 @@ import com.ryanschafer.authorgenie.R;
 
 abstract public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
 
-    Context mContext;
+    final Context mContext;
     private final Paint mClearPaint;
     private final ColorDrawable mBackground;
     private final int backgroundColor;

@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -108,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
         binding.header.setOnTouchListener(new OnSwipeTouchListener(this){
             @Override
             public void onSwipeLeft() {
+                super.onSwipeLeft();
+                cycleText();
+            }
+            @Override
+            public void onSwipeRight() {
                 super.onSwipeLeft();
                 cycleText();
             }

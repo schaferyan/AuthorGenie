@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import com.google.android.material.snackbar.Snackbar;
 import com.ryanschafer.authorgenie.datamodel.Goal;
 import com.ryanschafer.authorgenie.databinding.RecyclerviewFragmentBinding;
-import com.ryanschafer.authorgenie.ui.main.MainActivity;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;

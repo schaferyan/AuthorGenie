@@ -36,13 +36,10 @@ public class TextViewCarousel extends AppCompatTextView {
     @Override
     public boolean performClick() {
         super.performClick();
-        doSomething();
         return true;
     }
 
-    private void doSomething() {
 
-    }
 
 
 }

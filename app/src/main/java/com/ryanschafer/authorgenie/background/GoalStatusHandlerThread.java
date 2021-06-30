@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class GoalStatusHandlerThread extends HandlerThread {
 
     Handler handler;
-    MainViewModel mViewModel;
-    Context context;
+    final MainViewModel mViewModel;
+    final Context context;
 
     public GoalStatusHandlerThread(String name, MainViewModel viewModel, Context context) {
         super(name);

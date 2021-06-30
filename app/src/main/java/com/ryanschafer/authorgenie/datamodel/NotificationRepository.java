@@ -16,12 +16,12 @@ import java.util.concurrent.TimeUnit;
 
 
 public class NotificationRepository {
-    GoalDao goalDao;
+    final GoalDao goalDao;
     NotificationManager mNotificationManager;
     public static final int NOTIFICATION_ID = 0;
     public static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
     public static final String NOTIFICATION_GROUP_ID_GOAL_REMINDERS = "goal reminders";
-    SharedPreferences mPreferences;
+    final SharedPreferences mPreferences;
 
     public NotificationRepository(Application application){
         GoalDatabase db = GoalDatabase.getInstance(application);
