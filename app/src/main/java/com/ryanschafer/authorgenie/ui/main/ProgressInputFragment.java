@@ -27,6 +27,7 @@ import com.ryanschafer.authorgenie.datamodel.Goal;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,8 +59,13 @@ public class ProgressInputFragment extends Fragment {
         binding = ProgressInputFragmentBinding.inflate(inflater, container, false);
         submitButton = binding.addProgressButton;
         spinner = binding.spinner;
+        ArrayList<String> types = new ArrayList<>();
+        for(String type : Goal.getGoalTypes()){
+            types.add(type + "s");
+        }
+
         spinnerAdapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, Goal.getGoalTypes());
+                android.R.layout.simple_spinner_item, types);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
         return binding.getRoot();
@@ -67,13 +73,13 @@ public class ProgressInputFragment extends Fragment {
     }
 
 
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.actionbar_add) {
-            ((MainActivity) requireActivity()).showAddGoalFragment();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        if (item.getItemId() == R.id.actionbar_add) {
+//            ((MainActivity) requireActivity()).showAddGoalFragment();
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     private void addProgress() {
         EditText editText = binding.enterProgressEditText;

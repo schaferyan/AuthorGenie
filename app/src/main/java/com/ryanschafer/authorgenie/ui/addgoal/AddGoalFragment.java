@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -106,6 +107,14 @@ public class AddGoalFragment extends Fragment {
 
             }
         });
+        SwitchCompat freqSwitch = binding.freqSwitch;
+        freqSwitch.setOnClickListener(v -> {
+            if(freqSwitch.isChecked()){
+                freqSwitch.setText(R.string.recurring);
+            }else{
+                freqSwitch.setText(R.string.one_time);
+            }
+        });
     }
 
     public boolean submitNewGoal(){
@@ -116,17 +125,19 @@ public class AddGoalFragment extends Fragment {
         int amount;
         int duration;
         int goaltype;
+        boolean recurring;
         try {
             amount = Integer.parseInt(binding.editGoalAmount.getText().toString());
             duration = binding.goalDurationSpinner.getSelectedItemPosition();
             goaltype = binding.goalTypeSpinner.getSelectedItemPosition();
+            recurring = binding.freqSwitch.isChecked();
         }catch(NumberFormatException e){
             onInvalidInput();
             return false;
         }
         goal = new Goal(amount,
                 Goal.TYPE.values()[goaltype],
-                Goal.DURATION.values()[duration]);
+                Goal.DURATION.values()[duration], recurring);
         if (!mViewModel.addGoal(goal)){
             onDuplicateGoalSubmitted();
             return false;

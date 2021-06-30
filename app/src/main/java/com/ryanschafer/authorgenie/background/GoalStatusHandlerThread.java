@@ -44,7 +44,8 @@ public class GoalStatusHandlerThread extends HandlerThread {
                         if (message != null) {
                             showToast(message);
                         }
-                        mViewModel.addGoal(new Goal(goal.getObjective(), goal.getGoalTypeId()));
+                        if(goal.isRecurring())
+                        mViewModel.addGoal(new Goal(goal.getObjective(), goal.getType(), goal.getDuration(), true));
                     }
                     handler.postDelayed(this, TimeUnit.MINUTES.toMillis(1));
                 }

@@ -6,7 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.addgoal.AddGoalFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/big_margin"
+        android:layout_marginStart="16dp"
+        android:text="@string/enter_a_word_or_minute_goal"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-light"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.716" />
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -28,7 +43,6 @@
             android:textSize="18sp"
             android:textColorHint="@color/white"
             android:textColor="@color/white"
-            android:backgroundTint="@color/teal_700"
             android:textAlignment="center"
             android:gravity="center_horizontal"
             />
@@ -41,8 +55,7 @@
             android:fontFamily="sans-serif-light"
             android:minHeight="@dimen/min_height"
             android:textSize="18sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/teal_200"/>
+            android:textColor="@color/white" />
 
         <Spinner
             android:id="@+id/goal_duration_spinner"
@@ -50,8 +63,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textSize="18sp"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/freqSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/recurring"
             android:textColor="@color/white"
-            android:backgroundTint="@color/teal_200"/>
+            android:layout_margin="@dimen/big_margin"
+            />
 
         <Button
             android:id="@+id/button_submit_goal"

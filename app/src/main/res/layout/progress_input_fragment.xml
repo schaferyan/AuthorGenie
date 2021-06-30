@@ -13,52 +13,65 @@
     android:focusable="true">
 
 
-
-    <RelativeLayout
-        android:id="@+id/editTextWrapper"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/progress_input_background"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:layout_marginTop="@dimen/hugeMargin"
-        android:layout_marginBottom="@dimen/big_margin"
-        app:layout_constraintBottom_toTopOf="@id/addProgressButton"
-        app:layout_constraintStart_toStartOf="@id/addProgressButton"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/enter_progress_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:paddingHorizontal="@dimen/smallPadding"
-            android:hint="@string/update_progress_here"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColorHint="@color/black"
-
-            />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/spinnerWrapper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/progress_input_background"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginTop="@dimen/hugeMargin"
-        android:layout_marginBottom="@dimen/big_margin"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/addProgressButton"
-        app:layout_constraintStart_toEndOf="@+id/editTextWrapper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="115dp"
-            android:layout_height="50dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:paddingHorizontal="@dimen/smallPadding"/>
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/editTextWrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/hugeMargin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:background="@drawable/progress_input_background"
+            app:layout_constraintBottom_toTopOf="@id/addProgressButton"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerWrapper"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="@id/addProgressButton"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/enter_progress_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:hint="@string/update_progress_here"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:paddingHorizontal="@dimen/smallPadding"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColorHint="@color/black"
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/spinnerWrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/hugeMargin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:background="@drawable/progress_input_background"
+            app:layout_constraintBottom_toTopOf="@+id/addProgressButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/editTextWrapper"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
+                android:paddingHorizontal="@dimen/smallPadding"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </RelativeLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/addProgressButton"

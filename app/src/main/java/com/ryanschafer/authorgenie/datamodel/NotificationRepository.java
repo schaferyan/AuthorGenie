@@ -7,12 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import androidx.core.app.NotificationCompat;
-
-import androidx.core.app.NotificationCompat;
-
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.ui.main.MainActivity;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

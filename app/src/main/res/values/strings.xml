@@ -2,19 +2,19 @@
     <string name="app_name">AuthorGenie</string>
     <string name="minutes">minutes</string>
     <string name="words">words</string>
-    <string name="inspirational_reminder_text">\"Inspirational reminder text\"</string>
-    <string name="update_progress_here">update progress</string>
+    <string name="inspirational_reminder_text">Inspirational reminder text</string>
+    <string name="update_progress_here">total number</string>
     <string name="view_goals">View Goals</string>
     <string name="action_settings">Settings</string>
     <string name="submit">Add Goal</string>
     <string name="cancel">Cancel</string>
     <string name="new_goal_dialog_title">Add a Goal</string>
-    <string name="dialog_enter_a_goal">enter goal</string>
+    <string name="dialog_enter_a_goal">enter a number</string>
     <string name="invalid_input">Invalid input</string>
     <string name="overwrite_warning">You already have a goal of this type</string>
     <string name="overwrite_check">Overwrite existing goal</string>
     <string name="add_goal">Set a new goal…</string>
-    <string name="hint_new_goal">enter a goal</string>
+    <string name="hint_new_goal">enter a number</string>
     <string name="add_a_goal">add a goal</string>
     <string name="empty_progress_nums">00/00</string>
     <string name="goal_label">goal label placeholder</string>
@@ -29,14 +29,20 @@
     <string name="link_to_website_text"><a href="http://www.authorgenie.net">Stuck? Get an AuthorGenie boost</a></string>
     <string name="about">About</string>
     <string name="about_section">
-        Coded in Java
+        About Author Genie:
+        \n For more information about AuthorGenie, visit <a href= "http://www.authorgenie.net">authorgenie.net</a>
+        \n
+        \n About the app:
         \n This application was coded in Java by Ryan Schafer.
         \n It is open source and can be used, modified and distributed freely as described under MIT
-        \n For more information about AuthorGenie, visit <a href= "http://www.authorgenie.net">authorgenie.net</a>
+
     </string>
     <string name="author_genie_lamp_logo">Author Genie Lamp Logo</string>
     <string name="authorgenie_lamp_icon">AuthorGenie lamp icon</string>
     <string name="magic_lamp_icon">magic lamp icon</string>
+    <string name="enter_a_word_or_minute_goal">Set a word or minute goal for the day, week, or month.</string>
+    <string name="recurring">Recurring</string>
+    <string name="one_time">One time</string>
     <array name="inspire_text">
         <item>Close your eyes. Take a breath. Remember why you love this project.</item>
         <item>Hey, you’re here. You showed up. You get points for that.</item>

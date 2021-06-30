@@ -64,8 +64,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
+        android:layout_marginStart="@dimen/big_margin"
         android:text="@string/link_to_website_text"
         android:textColor="@color/purple_200"
         android:clickable="true"
@@ -81,6 +80,7 @@
         android:focusable="true"
         android:src="@drawable/ic_outline_add_24"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true" />
 

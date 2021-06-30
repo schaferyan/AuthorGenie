@@ -34,6 +34,7 @@
             android:textStyle="bold"
             android:fontFamily="Sans Serif"
             android:textColor="@color/dark_blue"
+            android:textSize="48sp"
             />
     </androidx.appcompat.widget.Toolbar>
 

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Entity(tableName = "goal_table")
 public class Goal {
@@ -26,6 +25,7 @@ public class Goal {
     private boolean current;
     private boolean met;
     private boolean notified;
+    private boolean recurring;
 
     @Ignore
     private DURATION duration;
@@ -101,18 +101,20 @@ public class Goal {
         notified = false;
     }
     @Ignore
-    public Goal(int objective, int goalTypeId){
+    public Goal(int objective, TYPE type, DURATION duration, boolean recurring) {
         this.objective = objective;
-        this.goalTypeId = goalTypeId;
         this.progress = 0;
-        setEnums();
+        this.type = type;
+        this.duration = duration;
+        setGoalTypeId();
         setName();
         setDeadline();
         current = true;
         notified = false;
+        this.recurring = recurring;
     }
 
-    public Goal(int id, long deadline, int objective, int progress, int goalTypeId, String name, boolean current, boolean met, boolean notified) {
+    public Goal(int id, long deadline, int objective, int progress, int goalTypeId, String name, boolean current, boolean met, boolean notified, boolean recurring) {
         this.id = id;
         this.deadline = deadline;
         this.objective = objective;
@@ -122,6 +124,7 @@ public class Goal {
         this.name = name;
         this.current = current;
         this.notified = notified;
+        this.recurring = recurring;
         setEnums();
         isCurrent();
     }
@@ -318,5 +321,13 @@ public class Goal {
         int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
         return currentMonth == monthDue && currentDay == dayDue;
+    }
+
+    public boolean isRecurring() {
+        return recurring;
+    }
+
+    public void setRecurring(boolean recurring) {
+        this.recurring = recurring;
     }
 }

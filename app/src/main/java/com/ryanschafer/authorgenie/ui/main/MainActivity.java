@@ -195,10 +195,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.actionbar_add) {
-            showAddGoalFragment();
-            return true;
-        } else if(item.getItemId() == R.id.action_about){
+        if(item.getItemId() == R.id.action_about){
            showAbout();
         }
         return super.onOptionsItemSelected(item);
