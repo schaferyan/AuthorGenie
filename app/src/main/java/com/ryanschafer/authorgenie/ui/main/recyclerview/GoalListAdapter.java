@@ -12,9 +12,8 @@ import java.util.List;
 
 public class GoalListAdapter extends ListAdapter<Goal, GoalViewHolder> {
 
-    List<Goal> cachedGoals;
 
-    protected GoalListAdapter(@NonNull DiffUtil.ItemCallback<Goal> diffCallback) {
+    public GoalListAdapter(@NonNull DiffUtil.ItemCallback<Goal> diffCallback) {
         super(diffCallback);
     }
 
@@ -30,15 +29,13 @@ public class GoalListAdapter extends ListAdapter<Goal, GoalViewHolder> {
         holder.bind(current);
     }
 
-    public void setCachedItems(List<Goal> goals) {
-        cachedGoals = goals;
-    }
+
 
     public Goal getGoal(int position) {
-        return cachedGoals.get(position);
+        return getCurrentList().get(position);
     }
 
-    static class GoalDiff extends DiffUtil.ItemCallback<Goal> {
+    public static class GoalDiff extends DiffUtil.ItemCallback<Goal> {
 
         @Override
         public boolean areItemsTheSame(@NonNull Goal oldItem, @NonNull Goal newItem) {

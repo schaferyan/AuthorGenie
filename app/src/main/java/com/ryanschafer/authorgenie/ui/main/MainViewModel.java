@@ -10,6 +10,7 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel {
     private final LiveData<List<Goal>> goals;
     private final GoalRepository goalRepository;
+    private boolean showFooter = false;
 //    private final ArrayList<Goal> currentGoals = new ArrayList<>();
 
 
@@ -54,5 +55,13 @@ public class MainViewModel extends AndroidViewModel {
 
     public void setGoalNotified(Goal goal, boolean b) {
         goalRepository.setGoalNotified(goal, b);
+    }
+
+    public boolean showFooter() {
+        return showFooter;
+    }
+
+    public void setShowFooter(boolean showFooter) {
+        this.showFooter = showFooter;
     }
 }

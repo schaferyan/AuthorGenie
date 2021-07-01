@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
         mPreferences = getSharedPreferences(prefFileName, MODE_PRIVATE);
         boolean mFirstTime = mPreferences.getBoolean(FIRST_TIME_KEY, true);
-//        mNotifyInit = mPreferences.getBoolean(NOTIFY_INIT_KEY, false);
 
         androidx.appcompat.widget.Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -80,14 +79,20 @@ public class MainActivity extends AppCompatActivity {
                 new ViewModelProvider.AndroidViewModelFactory(getApplication()))
                 .get(MainViewModel.class);
 
-        showDashboardFragment();
+
+
         if (savedInstanceState != null) {
             //Restore the fragment's instance
-
-            mAddGoalFragment = (AddGoalFragment) getSupportFragmentManager().getFragment(savedInstanceState, "AddGoalFragment");
+            mAddGoalFragment = (AddGoalFragment) getSupportFragmentManager()
+                    .getFragment(savedInstanceState, "AddGoalFragment");
             if(mAddGoalFragment!=null){
               showAddGoalFragment();
             }
+            else{
+                showDashboardFragment();
+            }
+        }else{
+            showDashboardFragment();
         }
 
         if(mFirstTime){
@@ -97,49 +102,13 @@ public class MainActivity extends AppCompatActivity {
 
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         createNotificationChannel();
-
-//        if(!mNotifyInit) {
-            scheduleAlarms();
-//            mPreferences.edit().putBoolean(NOTIFY_INIT_KEY, true).apply();
-//        }
+        scheduleAlarms();
 
 
-        binding.header.setOnTouchListener(new OnSwipeTouchListener(this){
-            @Override
-            public void onSwipeLeft() {
-                super.onSwipeLeft();
-                cycleText();
-            }
-            @Override
-            public void onSwipeRight() {
-                super.onSwipeLeft();
-                cycleText();
-            }
-
-
-        });
-
-        TextView linkTextView = binding.footer;
-        linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        linkTextView.setLinkTextColor(ContextCompat.getColor(this, R.color.purple_200));
-        binding.addGoalButton.setOnClickListener( v -> showAddGoalFragment());
 
     }
 
-    @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        Window window = getWindow();
-        WindowCompat.setDecorFitsSystemWindows(window, false);
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.footer, (v, insets) -> {
-            int addPadding = 8 + insets.getInsets(WindowInsetsCompat.Type.systemGestures()).bottom
-                    + insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom;
-            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), v.getPaddingRight(),
-                    addPadding);
-            return insets;
-        });
-    }
 
     @Override
     protected void onPause() {
@@ -147,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         if(mHandlerThread!= null && mHandlerThread.isAlive()) {
             mHandlerThread.interrupt();
         }
+        mHandlerThread = null;
         updateLastUsed();
     }
 
@@ -172,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
         mHandlerThread = new GoalStatusHandlerThread("handler-thread", mViewModel, this);
         mHandlerThread.start();
-        cycleText();
+
 
     }
 
@@ -183,14 +153,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void cycleText() {
-        AppCompatTextView textView = (AppCompatTextView) binding.header;
-        String[] strArr = getResources().getStringArray(R.array.inspire_text);
-        Random random = new Random();
-        int index = random.nextInt(strArr.length);
-        String text = strArr[index];
-        textView.setText(text);
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -212,9 +175,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
         getSupportFragmentManager().executePendingTransactions();
-        setShowHeader(false);
-        setShowFooter(false);
-        setShowAddButton(false);
+
     }
 
     public void showDashboardFragment(){
@@ -226,9 +187,6 @@ public class MainActivity extends AppCompatActivity {
         if(mAddGoalFragment == null){
             mAddGoalFragment = AddGoalFragment.newInstance();
         }
-        setShowFooter(false);
-        setShowHeader(false);
-        setShowAddButton(false);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_fragment_container,
                 mAddGoalFragment);
@@ -268,33 +226,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setShowHeader(boolean show){
-        View textView = binding.header;
-        if(show) {
-            textView.setVisibility(View.VISIBLE);
-        }else{
-            textView.setVisibility(View.GONE);
-        }
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        Window window = getWindow();
+        WindowCompat.setDecorFitsSystemWindows(window, false);
     }
-
-    public void setShowFooter(boolean show){
-        View textView = binding.footer;
-        if(show) {
-            textView.setVisibility(View.VISIBLE);
-        }else{
-            textView.setVisibility(View.GONE);
-        }
-    }
-    public void setShowAddButton(boolean show) {
-        View button = binding.addGoalButton;
-        if (show) {
-            button.setVisibility(View.VISIBLE);
-        } else {
-            button.setVisibility(View.GONE);
-        }
-    }
-
-
-
 
 }

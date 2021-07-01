@@ -71,12 +71,12 @@ public class GoalRepository {
         synchronized (activeGoalsMap) {
             for (Goal goal : activeGoalsMap.values()) {
                 if (!goal.isCurrent()) {
-                    GoalDatabase.dbWriteExecutor.execute(() -> goalDao.update(goal));
                     goalsEnded.add(goal);
                 }
             }
         }
         for(Goal goal: goalsEnded){
+            GoalDatabase.dbWriteExecutor.execute(() -> goalDao.update(goal));
             activeGoalsMap.remove(goal.getGoalTypeId());
         }
         return goalsEnded;

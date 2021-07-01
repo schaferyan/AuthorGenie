@@ -62,8 +62,5 @@ public class About extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ((MainActivity) requireActivity()).setShowHeader(true);
-        ((MainActivity) requireActivity()).setShowFooter(true);
-        ((MainActivity) requireActivity()).setShowAddButton(true);
     }
 }
