@@ -15,6 +15,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private NotificationManager mNotificationManager;
     public static final int NOTIFICATION_ID = 0;
     public static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
-    private static final String FIRST_TIME_KEY = "first time use";
+    public static final String FIRST_TIME_KEY = "first time use";
     private SharedPreferences mPreferences;
     public static final String prefFileName = "com.ryanschafer.authorgenie3";
     boolean mNotifyInit;
@@ -66,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
         binding = MainActivityBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
         setContentView(root);
+
+            ViewCompat.setOnApplyWindowInsetsListener(root, (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+//                mlp.leftMargin = insets.left;
+//                mlp.bottomMargin = insets.bottom;
+//                mlp.rightMargin = insets.right;
+                mlp.topMargin = insets.top;
+                v.setLayoutParams(mlp);
+
+                return windowInsets;
+            });
 
 
         mPreferences = getSharedPreferences(prefFileName, MODE_PRIVATE);
@@ -229,8 +243,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
+
         Window window = getWindow();
-        WindowCompat.setDecorFitsSystemWindows(window, false);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            WindowCompat.setDecorFitsSystemWindows(window, false);
+        }
     }
 
 }

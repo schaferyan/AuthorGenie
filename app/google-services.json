@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "245936730717",
+    "project_id": "authorgenie-27e39",
+    "storage_bucket": "authorgenie-27e39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245936730717:android:d88a308747af81e624d3b4",
+        "android_client_info": {
+          "package_name": "com.ryanschafer.authorgenie3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245936730717-sdj83qgg2dgr0kcdk3p45ke6nest4tr0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVDr6sMc05nqU7vbRftV9ld2hyp3isJaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245936730717-sdj83qgg2dgr0kcdk3p45ke6nest4tr0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

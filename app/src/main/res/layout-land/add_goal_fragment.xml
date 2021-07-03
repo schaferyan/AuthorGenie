@@ -10,10 +10,10 @@
 
         <EditText
             android:id="@+id/edit_goal_amount"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/hugeMargin"
             android:layout_marginTop="48dp"
+            android:backgroundTint="@color/teal_700"
             android:fontFamily="sans-serif-light"
             android:hint="@string/enter_a_word_or_minute_goal"
             android:importantForAutofill="no"
@@ -22,51 +22,61 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
             android:id="@+id/goal_type_spinner"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="@dimen/big_margin"
+            android:backgroundTint="@color/teal_200"
             android:fontFamily="sans-serif-light"
             android:minHeight="@dimen/min_height"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/freqSwitch"
+            app:layout_constraintEnd_toEndOf="@+id/edit_goal_amount"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/edit_goal_amount"
             app:layout_constraintTop_toBottomOf="@+id/goal_duration_spinner" />
 
         <Spinner
             android:id="@+id/goal_duration_spinner"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="@dimen/big_margin"
+            android:backgroundTint="@color/teal_200"
             android:textColor="@color/white"
             android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/edit_goal_amount"
             app:layout_constraintTop_toBottomOf="@+id/edit_goal_amount" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/freqSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/big_margin"
             android:checked="true"
             android:text="@string/recurring"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/button_submit_goal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/edit_goal_amount"
+            app:layout_constraintTop_toBottomOf="@+id/goal_type_spinner" />
 
         <Button
             android:id="@+id/button_submit_goal"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/design_default_color_primary"
+            android:layout_marginBottom="4dp"
             android:text="@string/submit"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/edit_goal_amount"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/edit_goal_amount"
+            app:layout_constraintTop_toBottomOf="@+id/freqSwitch"
+            app:layout_constraintVertical_bias="0.492" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

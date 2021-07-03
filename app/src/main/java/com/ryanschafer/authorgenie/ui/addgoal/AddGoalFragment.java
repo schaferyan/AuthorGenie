@@ -138,12 +138,8 @@ public class AddGoalFragment extends Fragment {
         goal = new Goal(amount,
                 Goal.TYPE.values()[goaltype],
                 Goal.DURATION.values()[duration], recurring);
-        if (!mViewModel.addGoal(goal)){
-            onDuplicateGoalSubmitted();
-            return false;
-        }else {
-            return true;
-        }
+                mViewModel.addGoal(goal);
+                return true;
     }
 
     private void onEmptyInput() {
@@ -151,22 +147,12 @@ public class AddGoalFragment extends Fragment {
         iidf.show(getChildFragmentManager(),"empty input");
     }
 
-    private void onDuplicateGoalSubmitted() {
-        ConfirmationDialogFragment dialog = ConfirmationDialogFragment.newInstance(
-                ConfirmationDialogFragment.PRIOR_GOAL_EXISTS);
-        dialog.show(getChildFragmentManager(), "overwrite?");
-    }
 
     private void onInvalidInput() {
         NotificationDialogFragment dialog = NotificationDialogFragment.newInstance(0);
         dialog.show(getChildFragmentManager(),"invalid input");
     }
 
-
-    public void replaceGoal() {
-        mViewModel.overwriteGoal(goal);
-        requireActivity().getSupportFragmentManager().popBackStackImmediate();
-    }
 
     @Override
     public void onDestroy() {

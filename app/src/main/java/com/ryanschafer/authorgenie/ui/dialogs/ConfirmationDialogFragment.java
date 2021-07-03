@@ -56,24 +56,13 @@ public class ConfirmationDialogFragment extends DialogFragment {
         String negText = getString(R.string.no);
         DialogInterface.OnClickListener posListener = null;
         DialogInterface.OnClickListener negListener = null;
-        switch (dialogTypeId){
-            case PRIOR_GOAL_EXISTS:
-                title = "Overwrite goal";
-                message = "You already have a goal set of this kind. Would you like to cancel it and" +
-                        "set a new one?";
-                posText = getString(R.string.yes);
-                negText = getString(R.string.no);
-                posListener = this::onReplace;
-                negListener = (dialog, id) -> dialog.dismiss();
-                break;
-            case FIRST_TIME_USER:
-                title = "Welcome to Author Genie";
-                message = "Get started by entering a goal.";
-                posText = "Ok, I will!";
-                negText = "No, I don't want to";
-                posListener = this::showAddGoalFragment;
-                negListener = (dialog, id) -> dialog.dismiss();
-                break;
+        if (dialogTypeId == FIRST_TIME_USER) {
+            title = "Welcome to Author Genie";
+            message = "Get started by entering a goal.";
+            posText = "Ok, I will!";
+            negText = "No, I don't want to";
+            posListener = this::showAddGoalFragment;
+            negListener = (dialog, id) -> dialog.dismiss();
         }
         alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(requireContext(), R.style.AlertDialogCustom))
                 .setView(binding.getRoot())
@@ -91,12 +80,4 @@ public class ConfirmationDialogFragment extends DialogFragment {
         dialogInterface.dismiss();
     }
 
-    private void onReplace(DialogInterface dialog, int id) {
-       Fragment fragment = requireActivity().getSupportFragmentManager().
-               findFragmentById(R.id.main_fragment_container);
-        if (fragment != null) {
-            ((AddGoalFragment) fragment).replaceGoal();
-        }
-        dialog.dismiss();
-    }
 }

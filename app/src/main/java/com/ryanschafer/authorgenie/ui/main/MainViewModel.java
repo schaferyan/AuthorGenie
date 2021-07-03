@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.ryanschafer.authorgenie.datamodel.Goal;
 import com.ryanschafer.authorgenie.datamodel.GoalRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
@@ -21,37 +23,32 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
-    public boolean addGoal(Goal goal){
-        return goalRepository.addGoal(goal);
+    public void addGoal(Goal goal){
+         goalRepository.addGoal(goal);
     }
 
-    public void overwriteGoal(Goal goal){
-        goalRepository.replaceGoal(goal);
-    }
 
     public void removeGoal(Goal goal){
-        goalRepository.removeGoal(goal);
+
+        goal.setCurrent(false);
+        goalRepository.updateGoal(goal);
     }
 
-    public void addProgress(int progress, Goal.TYPE inputType) {
-        goalRepository.updateAllProgress(progress, inputType);
+//    Adds progress to goals in the list passed with the specified input type, then updates
+//    the database
+    public void addProgress(int progress, Goal.TYPE inputType, List<Goal> activeGoals) {
+        for(Goal goal : activeGoals){
+            if(goal.getType() == inputType){
+                goal.addProgress(progress);
+                goalRepository.updateGoal(goal);
+            }
+        }
     }
 
     public LiveData<List<Goal>> getGoals(){
         return goals;
     }
 
-//    public ArrayList<Goal> getCurrentGoals() {
-//        return currentGoals;
-//    }
-
-    public List<Goal> getFinishedGoals(){
-       return goalRepository.getFinishedGoals();
-    }
-
-    public List<Goal> getUnannouncedMetGoals() {
-        return goalRepository.getUnannouncedMetGoals();
-    }
 
     public void setGoalNotified(Goal goal, boolean b) {
         goalRepository.setGoalNotified(goal, b);
@@ -63,5 +60,25 @@ public class MainViewModel extends AndroidViewModel {
 
     public void setShowFooter(boolean showFooter) {
         this.showFooter = showFooter;
+    }
+
+
+    public void updateGoal(Goal goal) {
+        goalRepository.updateGoal(goal);
+    }
+
+    public List<Goal> getUnannouncedMetGoals(List<Goal> currentList) {
+        List<Goal> metGoals = new ArrayList<>();
+        for(Goal goal : currentList){
+            if(goal.isMet() && !goal.isNotified()){
+                metGoals.add(goal);
+                goal.setNotified(true);
+            }
+        }
+        return metGoals;
+    }
+
+    public List<Goal> getGoalsAsList() {
+        return goalRepository.getGoalsAsList();
     }
 }

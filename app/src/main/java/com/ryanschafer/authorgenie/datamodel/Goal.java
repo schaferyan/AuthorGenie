@@ -23,7 +23,6 @@ public class Goal {
     private int goalTypeId;
     private String name;
     private boolean current;
-    private boolean met;
     private boolean notified;
     private boolean recurring;
 
@@ -114,19 +113,17 @@ public class Goal {
         this.recurring = recurring;
     }
 
-    public Goal(int id, long deadline, int objective, int progress, int goalTypeId, String name, boolean current, boolean met, boolean notified, boolean recurring) {
+    public Goal(int id, long deadline, int objective, int progress, int goalTypeId, String name, boolean current, boolean notified, boolean recurring) {
         this.id = id;
         this.deadline = deadline;
         this.objective = objective;
         this.progress = progress;
         this.goalTypeId = goalTypeId;
-        this.met = met;
         this.name = name;
         this.current = current;
         this.notified = notified;
         this.recurring = recurring;
         setEnums();
-        isCurrent();
     }
 
     private void setGoalTypeId() {
@@ -224,7 +221,6 @@ public class Goal {
 
     public void addProgress(int progress) {
         this.progress += progress;
-        met = this.progress >= objective;
     }
 
     public DURATION getDuration() {
@@ -252,8 +248,8 @@ public class Goal {
     }
 
     public boolean isMet() {
-        met = (progress >= objective);
-        return met;
+        return(progress >= objective);
+
     }
 
     public boolean isNotified() {
@@ -276,8 +272,7 @@ public class Goal {
     }
 
     public boolean isCurrent(){
-        Date date = Calendar.getInstance().getTime();
-        setCurrent(!date.after(getDeadlineAsDate()));
+
         return current;
     }
 

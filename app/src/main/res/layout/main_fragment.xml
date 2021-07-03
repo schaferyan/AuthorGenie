@@ -18,20 +18,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.ryanschafer.authorgenie.ui.main.TextViewCarousel
         android:id="@+id/header"
         style="@style/tipsAndQuotesText"
         android:layout_width="wrap_content"
-        android:layout_height="65dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:maxWidth="325dp"
-        android:padding="@dimen/big_padding"
         android:text="@string/inspirational_reminder_text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,18 +42,22 @@
         app:layout_constraintGuide_percent=".5"
         android:orientation="vertical" />
 
+
     <TextView
         android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/big_margin"
-        android:width="140dp"
+        android:padding="@dimen/smallPadding"
         android:text="@string/main_instructions"
+        android:background="@color/purple_dark"
         android:textColor="@color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/editTextWrapper"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
-
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <RelativeLayout
         android:id="@+id/editTextWrapper"
@@ -106,32 +110,31 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginHorizontal="@dimen/big_margin"
-        android:layout_marginEnd="16dp"
         android:text="@string/update"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.846" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".55"/>
+        app:layout_constraintGuide_begin="309dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/big_margin"
         android:background="@color/darker_blue"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0" />
 
     <TextView
@@ -141,7 +144,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/link_to_website_text"
-        android:textColor="@color/purple_200"
+        android:textColor="@color/purple_light"
         android:textAlignment="center"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@id/recyclerview"
@@ -153,7 +156,7 @@
         android:id="@+id/addGoalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/hugeMargin"
+        android:padding="@dimen/big_padding"
         android:clickable="true"
         android:contentDescription="@string/add_a_goal"
         android:focusable="true"

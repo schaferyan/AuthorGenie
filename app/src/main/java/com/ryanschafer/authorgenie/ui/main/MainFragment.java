@@ -5,13 +5,13 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -25,8 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -50,6 +50,7 @@ import java.util.Random;
 public class MainFragment extends Fragment {
 
     private static final String FOOTER_PREF_KEY = "footer_pref_key";
+    private static final String INSTRUCTIONS_SEEN_KEY = "instructions_seen_key";
     MainFragmentBinding binding;
     MainViewModel mViewModel;
     GoalListAdapter adapter;
@@ -57,7 +58,7 @@ public class MainFragment extends Fragment {
     Button submitButton;
     Spinner spinner;
     MediaPlayer mediaPlayer;
-
+    SharedPreferences mPreferences;
 
     public MainFragment(){}
 
@@ -76,6 +77,8 @@ public class MainFragment extends Fragment {
         binding = MainFragmentBinding.inflate(inflater, container, false);
         submitButton = binding.addProgressButton;
         spinner = binding.spinner;
+        mPreferences = requireContext().getSharedPreferences(MainActivity.prefFileName, MainActivity.MODE_PRIVATE);
+
         ArrayList<String> types = new ArrayList<>();
         for(String type : Goal.getGoalTypes()){
             types.add(type + "s");
@@ -86,6 +89,8 @@ public class MainFragment extends Fragment {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
         return binding.getRoot();
+
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -123,7 +128,7 @@ public class MainFragment extends Fragment {
         binding.addGoalButton.setOnClickListener( v -> ((MainActivity) requireActivity()).showAddGoalFragment());
         TextView linkTextView = binding.footer2;
         linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        linkTextView.setLinkTextColor(ContextCompat.getColor(requireContext(), R.color.purple_200));
+        linkTextView.setLinkTextColor(ContextCompat.getColor(requireContext(), R.color.purple_light));
 
         binding.header.setOnTouchListener(new OnSwipeTouchListener(requireContext()){
             @Override
@@ -138,23 +143,45 @@ public class MainFragment extends Fragment {
             }
         });
 
-        if (binding.instructions != null) {
-            binding.instructions.setOnTouchListener(new OnSwipeTouchListener(requireContext()){
-                @Override
-                public void onSwipeLeft() {
-                    super.onSwipeLeft();
-                    binding.instructions.setVisibility(View.GONE);
-                }
-                @Override
-                public void onSwipeRight() {
-                    super.onSwipeLeft();
-                    binding.instructions.setVisibility(View.GONE);
-                }
-            });
+        binding.instructions.setOnTouchListener(new OnSwipeTouchListener(requireContext()){
+            @Override
+            public void onSwipeLeft() {
+                super.onSwipeLeft();
+                hideInstructions();
+            }
+            @Override
+            public void onSwipeRight() {
+                super.onSwipeLeft();
+                hideInstructions();
+            }
+        });
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.addGoalButton, (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() |
+                    WindowInsetsCompat.Type.systemGestures());
+
+            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+            mlp.bottomMargin = insets.bottom + 8;
+            mlp.rightMargin = insets.right + 8;
+            v.setLayoutParams(mlp);
+            return WindowInsetsCompat.CONSUMED;
+        });
+
+        if(mPreferences.getBoolean(INSTRUCTIONS_SEEN_KEY, false)){
+
+            binding.instructions.setVisibility(View.GONE);
+        }else{
+            binding.instructions.setVisibility(View.VISIBLE);
         }
-//        Window window = requireActivity().getWindow();
 
 
+
+    }
+
+    private void hideInstructions() {
+        binding.instructions.setVisibility(View.GONE);
+        mPreferences.edit().putBoolean(INSTRUCTIONS_SEEN_KEY, true).apply();
 
     }
 
@@ -184,8 +211,8 @@ public class MainFragment extends Fragment {
                 Snackbar snackbar = Snackbar
                         .make(binding.mainFragmentConstraintLayout, "Goal was deleted", Snackbar.LENGTH_LONG);
                 snackbar.setAction("UNDO", view -> {
-
-                    mViewModel.addGoal(selectedGoal);
+                    selectedGoal.setCurrent(true);
+                    mViewModel.updateGoal(selectedGoal);
                     binding.recyclerview.scrollToPosition(position);
                 });
 
@@ -217,8 +244,8 @@ public class MainFragment extends Fragment {
         if(progress != 0) {
             sounds[0] = R.raw.tinkle;
         }
-        mViewModel.addProgress(progress, inputType);
-        List<Goal> metGoals = mViewModel.getUnannouncedMetGoals();
+        mViewModel.addProgress(progress, inputType, adapter.getCurrentList());
+        List<Goal> metGoals = mViewModel.getUnannouncedMetGoals(adapter.getCurrentList());
 
         if(!metGoals.isEmpty()){
             sounds[1] = R.raw.success;
