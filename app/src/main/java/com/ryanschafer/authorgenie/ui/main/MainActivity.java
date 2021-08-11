@@ -1,5 +1,6 @@
 package com.ryanschafer.authorgenie.ui.main;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,22 +12,24 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.TextView;
 
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -36,35 +39,61 @@ import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.MainActivityBinding;
 import com.ryanschafer.authorgenie.ui.about.About;
 import com.ryanschafer.authorgenie.ui.addgoal.AddGoalFragment;
-import com.ryanschafer.authorgenie.ui.dialogs.ConfirmationDialogFragment;
 import com.ryanschafer.authorgenie.background.GoalStatusHandlerThread;
+import com.ryanschafer.authorgenie.ui.wordprocessor.ScrollingEditTextActivity;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 import java.util.Objects;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String ADD_GOAL_FRAGMENT_KEY = "AddGoalFragment";
-    public static final String LAST_USED_KEY = "Time last used in millis";
-    MainActivityBinding binding;
-    MainViewModel mViewModel;
+    private static final String LAST_USED_KEY = "Time last used in millis";
+    private static final String GRAPH_FRAGMENT_KEY = "GraphFragment";
+    private static final int NOTIFICATION_ID = 0;
+    private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
+    private static final String FIRST_TIME_KEY = "first time use";
+    private static final String WORDS_COUNTED_NAME = "words_counted_in_word_counter";
+    private static final String WORDS_COUNTED_KEY = WORDS_COUNTED_NAME;
+    private static final String SETTINGS_FRAGMENT_KEY = "SettingsFragment";
+
+    private MainActivityBinding binding;
+    private MainViewModel mViewModel;
     private GoalStatusHandlerThread mHandlerThread;
     private NotificationManager mNotificationManager;
-    public static final int NOTIFICATION_ID = 0;
-    public static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
-    public static final String FIRST_TIME_KEY = "first time use";
+
     private SharedPreferences mPreferences;
-    public static final String prefFileName = "com.ryanschafer.authorgenie3";
+    public static final String prefFileName = "com.ryanschafer.authorgenie4";
     boolean mNotifyInit;
     private AddGoalFragment mAddGoalFragment;
+    private GraphFragment mGraphFragment;
+    private SettingsFragment mSettingsFragment;
+
+    boolean mFirstTime;
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>(){
+
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == Activity.RESULT_OK){
+                        Intent intent = result.getData();
+                        if (intent != null) {
+                            int words = intent.getIntExtra(WORDS_COUNTED_NAME, 0);
+                            mPreferences.edit().putInt(WORDS_COUNTED_KEY, words).apply();
+                        }
+
+                    }
+                }
+            });
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = MainActivityBinding.inflate(getLayoutInflater());
         View root = binding.getRoot();
         setContentView(root);
@@ -83,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mPreferences = getSharedPreferences(prefFileName, MODE_PRIVATE);
-        boolean mFirstTime = mPreferences.getBoolean(FIRST_TIME_KEY, true);
+        mFirstTime = mPreferences.getBoolean(FIRST_TIME_KEY, true);
 
         androidx.appcompat.widget.Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -95,31 +124,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         if (savedInstanceState != null) {
             //Restore the fragment's instance
-            mAddGoalFragment = (AddGoalFragment) getSupportFragmentManager()
-                    .getFragment(savedInstanceState, "AddGoalFragment");
-            if(mAddGoalFragment!=null){
-              showAddGoalFragment();
-            }
-            else{
-                showDashboardFragment();
-            }
-        }else{
-            showDashboardFragment();
+            FragmentManager supportFragmentManager = getSupportFragmentManager();
+            mAddGoalFragment = (AddGoalFragment) supportFragmentManager
+                    .getFragment(savedInstanceState, ADD_GOAL_FRAGMENT_KEY);
+            mGraphFragment = (GraphFragment) supportFragmentManager
+                    .getFragment(savedInstanceState, GRAPH_FRAGMENT_KEY);
+            mSettingsFragment = (SettingsFragment) supportFragmentManager
+                    .getFragment(savedInstanceState, SETTINGS_FRAGMENT_KEY);
+
         }
 
-        if(mFirstTime){
-            showFirstTimeDialog();
-            mPreferences.edit().putBoolean(FIRST_TIME_KEY, false).apply();
-        }
 
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         createNotificationChannel();
+        updateLastUsed();
         scheduleAlarms();
-
-
-
     }
 
 
@@ -145,9 +167,29 @@ public class MainActivity extends AppCompatActivity {
             AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
             if (alarmManager != null) {
                 alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(),
-                        AlarmManager.INTERVAL_HALF_DAY / 2, notifyPendingIntent);
+                        AlarmManager.INTERVAL_HALF_DAY/2, notifyPendingIntent);
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        showDashboardFragment();
+        if(mAddGoalFragment!=null){
+            showAddGoalFragment();
+        }
+        else if(mGraphFragment != null){
+            showProgress();
+        }
+        else if(mSettingsFragment != null){
+            showSettings();
+        }
+        if(mFirstTime){
+            mPreferences.edit().putBoolean(FIRST_TIME_KEY, false).apply();
+            showAddGoalFragment();
+        }
+
     }
 
     @Override
@@ -176,13 +218,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.action_about){
-           showAbout();
+        if(item.getItemId() == R.id.action_write){
+            launchWriter();
         }
+        if(item.getItemId() == R.id.action_progress){
+            showProgress();
+        }
+        if (item.getItemId() == R.id.action_settings){
+            showSettings();
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
-    private void showAbout() {
+
+
+
+    public void showAbout() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_fragment_container,
                 About.newInstance());
@@ -191,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().executePendingTransactions();
 
     }
+
 
     public void showDashboardFragment(){
         getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment_container,
@@ -208,11 +261,27 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
         getSupportFragmentManager().executePendingTransactions();
     }
-
-    public void showFirstTimeDialog(){
-        ConfirmationDialogFragment dialog = ConfirmationDialogFragment.newInstance(
-                ConfirmationDialogFragment.FIRST_TIME_USER);
-        dialog.show(getSupportFragmentManager(), "set a goal?");
+    private void showProgress() {
+        if(mGraphFragment == null){
+            mGraphFragment = GraphFragment.newInstance();
+        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_fragment_container,
+                mGraphFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        getSupportFragmentManager().executePendingTransactions();
+    }
+    private void showSettings() {
+        if(mSettingsFragment == null){
+            mSettingsFragment = SettingsFragment.newInstance();
+        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_fragment_container,
+                mSettingsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+        getSupportFragmentManager().executePendingTransactions();
     }
 
     private void createNotificationChannel() {
@@ -231,10 +300,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NotNull Bundle outState) {
         super.onSaveInstanceState(outState);
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
         if(mAddGoalFragment != null && mAddGoalFragment.isAdded()) {
             try {
-                getSupportFragmentManager().putFragment(outState, ADD_GOAL_FRAGMENT_KEY, mAddGoalFragment);
+                supportFragmentManager.putFragment(outState, ADD_GOAL_FRAGMENT_KEY, mAddGoalFragment);
             } catch (IllegalStateException | NullPointerException e) {
+                e.printStackTrace();
+            }
+        }else if(mGraphFragment != null && mGraphFragment.isAdded()){
+            try {
+                supportFragmentManager.putFragment(outState, GRAPH_FRAGMENT_KEY, mGraphFragment);
+            } catch (IllegalStateException | NullPointerException e) {
+                e.printStackTrace();
+            }
+        }else if(mSettingsFragment != null && mSettingsFragment.isAdded()){
+            try {
+                supportFragmentManager.putFragment(outState, SETTINGS_FRAGMENT_KEY, mSettingsFragment);
+            }catch (IllegalStateException e){
                 e.printStackTrace();
             }
         }
@@ -248,6 +330,11 @@ public class MainActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             WindowCompat.setDecorFitsSystemWindows(window, false);
         }
+    }
+
+    private void launchWriter() {
+        Intent intent = new Intent(MainActivity.this, ScrollingEditTextActivity.class);
+        launcher.launch(intent);
     }
 
 }

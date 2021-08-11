@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Theme.AuthorGenie3" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -13,5 +13,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/purple_dark</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+
     </style>
 </resources>

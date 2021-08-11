@@ -10,16 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
-    private final LiveData<List<Goal>> goals;
+    private final LiveData<List<Goal>> currentGoals;
+    private final LiveData<List<Goal>> allGoals;
     private final GoalRepository goalRepository;
-    private boolean showFooter = false;
+    private List<Goal> cachedGoals;
+
 //    private final ArrayList<Goal> currentGoals = new ArrayList<>();
 
 
     public MainViewModel(Application application){
         super(application);
         goalRepository = new GoalRepository(application);
-        goals = goalRepository.getGoals();
+        currentGoals = goalRepository.getCurrentGoals();
+        allGoals = goalRepository.getAllGoals();
+        cachedGoals = new ArrayList<>();
     }
 
 
@@ -30,8 +34,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public void removeGoal(Goal goal){
 
-        goal.setCurrent(false);
-        goalRepository.updateGoal(goal);
+        goalRepository.delete(goal);
     }
 
 //    Adds progress to goals in the list passed with the specified input type, then updates
@@ -45,23 +48,14 @@ public class MainViewModel extends AndroidViewModel {
         }
     }
 
-    public LiveData<List<Goal>> getGoals(){
-        return goals;
+    public LiveData<List<Goal>> getCurrentGoals(){
+        return currentGoals;
     }
 
 
     public void setGoalNotified(Goal goal, boolean b) {
         goalRepository.setGoalNotified(goal, b);
     }
-
-    public boolean showFooter() {
-        return showFooter;
-    }
-
-    public void setShowFooter(boolean showFooter) {
-        this.showFooter = showFooter;
-    }
-
 
     public void updateGoal(Goal goal) {
         goalRepository.updateGoal(goal);
@@ -80,5 +74,17 @@ public class MainViewModel extends AndroidViewModel {
 
     public List<Goal> getGoalsAsList() {
         return goalRepository.getGoalsAsList();
+    }
+
+    public LiveData<List<Goal>> getAllGoals() {
+        return allGoals;
+    }
+
+    public List<Goal> getCachedGoals() {
+        return cachedGoals;
+    }
+
+    public void setCachedGoals(List<Goal> cachedGoals) {
+        this.cachedGoals = cachedGoals;
     }
 }

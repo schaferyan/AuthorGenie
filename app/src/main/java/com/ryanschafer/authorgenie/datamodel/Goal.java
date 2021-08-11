@@ -218,6 +218,34 @@ public class Goal {
     public int getGoalTypeId() {
         return goalTypeId;
     }
+    
+    public static int getGoalTypeId(int typeIndex, int durationIndex){
+        TYPE type = TYPE.values()[typeIndex];
+        DURATION duration = DURATION.values()[durationIndex];
+        if (type == TYPE.WORD) {
+            if (duration == DURATION.DAY) {
+                return DAY_WORD;
+            } else if (duration == DURATION.WEEK) {
+                return WEEK_WORD;
+            } else if (duration == DURATION.MONTH) {
+                return MONTH_WORD;
+            } else {
+                return OTHER;
+            }
+        } else if (type == TYPE.TIME) {
+            if (duration == DURATION.DAY) {
+                return DAY_TIME;
+            } else if (duration == DURATION.WEEK) {
+                return WEEK_TIME;
+            } else if (duration == DURATION.MONTH) {
+                return MONTH_TIME;
+            } else {
+                return OTHER;
+            }
+        } else {
+            return OTHER;
+        }
+    }
 
     public void addProgress(int progress) {
         this.progress += progress;

@@ -2,12 +2,13 @@ package com.ryanschafer.authorgenie.datamodel;
 
 import android.app.Application;
 
+
 import androidx.lifecycle.LiveData;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.List;
 
 public class GoalRepository {
@@ -15,7 +16,7 @@ public class GoalRepository {
 
     private final GoalDao goalDao;
     private final LiveData<List<Goal>> goals;
-
+    private final LiveData<List<Goal>> allGoals;
 
     public GoalRepository(Application application){
         GoalDatabase db = GoalDatabase.getInstance(application);
@@ -23,6 +24,7 @@ public class GoalRepository {
 //        Calendar calendar = Calendar.getInstance();
 //        long timeInMillis = calendar.getTimeInMillis();
         goals = goalDao.getCurrentGoals();
+        allGoals = goalDao.getAllGoals();
     }
 
     public void addGoal(@NotNull Goal goal){
@@ -31,7 +33,7 @@ public class GoalRepository {
 
     }
 
-    public LiveData<List<Goal>> getGoals() {
+    public LiveData<List<Goal>> getCurrentGoals() {
         return goals;
     }
 
@@ -55,10 +57,15 @@ public class GoalRepository {
     }
 
     public List<Goal> getGoalsAsList() {
-        List<Goal> currentGoals = new ArrayList<>();
-        GoalDatabase.dbWriteExecutor.execute(() -> {
-            currentGoals.addAll(goalDao.getCurrentGoalsAsList());
-        });
-        return currentGoals;
+
+        return new ArrayList<>(goalDao.getCurrentGoalsAsList());
+    }
+
+    public LiveData<List<Goal>> getAllGoals() {
+        return allGoals;
+    }
+
+    public void delete(Goal goal) {
+        GoalDatabase.dbWriteExecutor.execute(()-> goalDao.delete(goal));
     }
 }

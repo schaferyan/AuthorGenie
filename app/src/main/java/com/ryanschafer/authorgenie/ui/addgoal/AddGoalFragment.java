@@ -138,8 +138,9 @@ public class AddGoalFragment extends Fragment {
         goal = new Goal(amount,
                 Goal.TYPE.values()[goaltype],
                 Goal.DURATION.values()[duration], recurring);
-                mViewModel.addGoal(goal);
-                return true;
+        mViewModel.addGoal(goal);
+        binding.editGoalAmount.setText("");
+        return true;
     }
 
     private void onEmptyInput() {

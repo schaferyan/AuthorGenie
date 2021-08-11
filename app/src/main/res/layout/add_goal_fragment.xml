@@ -16,7 +16,6 @@
             android:fontFamily="sans-serif-light"
             android:text="@string/enter_a_word_or_minute_goal"
             android:textColor="@color/white"
-            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/edit_goal_amount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -49,7 +48,6 @@
             android:fontFamily="sans-serif-light"
             android:minHeight="@dimen/min_height"
             android:textColor="@color/white"
-            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/goal_duration_spinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -60,7 +58,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textColor="@color/white"
-            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/freqSwitch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

@@ -31,7 +31,6 @@
         android:layout_centerVertical="true"
         android:maxWidth="200dp"
         android:padding="@dimen/big_padding"
-        android:text="@string/inspirational_reminder_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.164"
@@ -66,7 +65,7 @@
         app:layout_constraintHorizontal_bias=".9">
 
         <EditText
-            android:id="@+id/enter_progress_editText"
+            android:id="@+id/enterProgressEditText"
             android:layout_width="115dp"
             android:layout_height="50dp"
             android:hint="@string/progress_hint"
@@ -124,7 +123,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
-        android:id="@+id/footer2"
+        android:id="@+id/authorGenieButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -161,7 +160,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addGoalButton"
+        android:id="@+id/newGoalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -169,7 +168,7 @@
         android:clickable="true"
         android:contentDescription="@string/add_a_goal"
         android:focusable="true"
-        android:src="@drawable/ic_outline_add_24"
+        app:srcCompat="@drawable/ic_outline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="RelativeOverlap" />

@@ -40,12 +40,12 @@ public class GoalStatusHandlerThread extends HandlerThread {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                while (!Thread.currentThread().isInterrupted()) {
                     String message = null;
                     List<Goal> goals = mViewModel.getGoalsAsList();
                     for (Goal goal : goals) {
                         if (goal.getDeadline() <= Calendar.getInstance().getTimeInMillis()) {
-
+                            goal.setCurrent(false);
+                            mViewModel.updateGoal(goal);
                             if (goal.getProgress() > goal.getObjective()) {
                                 message = "You exceeded your goal by " + (goal.getProgress() -
                                         goal.getObjective()) + "!";
@@ -60,12 +60,15 @@ public class GoalStatusHandlerThread extends HandlerThread {
                             }
                         }
                     }
-
+                handler.postAtTime(this, midnight);
                 }
-            }
+
+
+
         };
 // Schedule the task for midnight
-        handler.postAtTime(runnable, midnight);
+
+        handler.post(runnable);
     }
     private void showToast(String message){
             Handler mainHandler = new Handler(context.getMainLooper());

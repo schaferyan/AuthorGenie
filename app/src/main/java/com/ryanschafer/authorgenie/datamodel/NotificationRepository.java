@@ -17,11 +17,12 @@ import java.util.concurrent.TimeUnit;
 
 public class NotificationRepository {
     final GoalDao goalDao;
-    NotificationManager mNotificationManager;
-    public static final int NOTIFICATION_ID = 0;
-    public static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
-    public static final String NOTIFICATION_GROUP_ID_GOAL_REMINDERS = "goal reminders";
-    final SharedPreferences mPreferences;
+    private NotificationManager mNotificationManager;
+    private static final int NOTIFICATION_ID = 0;
+    private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
+    private static final String NOTIFICATION_GROUP_ID_GOAL_REMINDERS = "goal reminders";
+    private static final String LAST_USED_KEY = "Time last used in millis";
+    private final SharedPreferences mPreferences;
 
     public NotificationRepository(Application application){
         GoalDatabase db = GoalDatabase.getInstance(application);
@@ -33,7 +34,7 @@ public class NotificationRepository {
     public void sendGoalNotifications(Context context){
         Calendar calendar = Calendar.getInstance();
         long currentTime = calendar.getTimeInMillis();
-        long lastUsed = mPreferences.getLong(MainActivity.LAST_USED_KEY, currentTime);
+        long lastUsed = mPreferences.getLong(LAST_USED_KEY, currentTime);
         final List<Goal> currentGoals = new ArrayList<>();
         GoalNotification[] notifications = new GoalNotification[7];
         GoalDatabase.dbWriteExecutor.execute(() -> {

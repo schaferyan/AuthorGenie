@@ -1,27 +1,12 @@
 <resources>
     <string name="app_name">AuthorGenie</string>
-    <string name="minutes">minutes</string>
-    <string name="words">words</string>
-    <string name="inspirational_reminder_text">Inspirational reminder text</string>
-    <string name="update_progress_here">Number</string>
-    <string name="view_goals">View Goals</string>
     <string name="action_settings">Settings</string>
     <string name="submit">Add Goal</string>
-    <string name="cancel">Cancel</string>
-    <string name="new_goal_dialog_title">Add a Goal</string>
-    <string name="dialog_enter_a_goal">enter a number</string>
-    <string name="invalid_input">Invalid input</string>
-    <string name="overwrite_warning">You already have a goal of this type</string>
-    <string name="overwrite_check">Overwrite existing goal</string>
-    <string name="add_goal">Set a new goal…</string>
     <string name="hint_new_goal">enter a number</string>
     <string name="add_a_goal">add a goal</string>
-    <string name="empty_progress_nums">00/00</string>
-    <string name="goal_label">goal label placeholder</string>
     <string name="goal_label_placeholder">goal label placeholder</string>
     <string name="date_placeholder">date placeholder</string>
     <string name="goal_numbers_placeholder">00/00</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="OK">OK</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
@@ -30,7 +15,7 @@
     <string name="about">About</string>
     <string name="about_section">
         About Author Genie:
-        \n For more information about AuthorGenie, visit <a href= "http://www.authorgenie.net">authorgenie.net</a>
+        \n For more information about AuthorGenie, visit <a href="http://www.authorgenie.net">authorgenie.net</a>
         \n
         \n About the app:
         \n This application was coded in Java by Ryan Schafer.
@@ -46,17 +31,19 @@
     <string name="progress_hint">0</string>
     <string name="pyramid">Pyramid</string>
     <string name="main_instructions">Enter the number of words or minutes you\'ve written today.
-        \n[swipe to hide]
+        \n(swipe to hide)
     </string>
     <array name="inspire_text">
         <item>Close your eyes. Take a breath. Remember why you love this project.</item>
         <item>Hey, you’re here. You showed up. You get points for that.</item>
         <item>Inner critic getting loud? You are not alone! Mine is named Fred. Yours?</item>
         <item>Keep your eyes on your own writing journey. Comparisons are dangerous.</item>
-        <item>Write words? You are a <i>writer</i>. <i>Not</i> a wannabe. <i>Not</i> an impostor.</item>
+        <item>Write words? You are a <i>writer</i>. <i>Not</i> a wannabe. <i>Not</i> an impostor.
+        </item>
         <item>Stuck? Try a smaller goal. Small successes keep you coming back.</item>
         <item>Your weird, frustrating process is your process. Own it. Make peace with it.</item>
-        <item>Nobody else could write this like <i>you</i>.</item>
+        <item>Nobody else could write this like <i>you</i>.
+        </item>
         <item>What do you love about this project? Focus on that.</item>
         <item>Hey, sometimes you just have to take a nap.</item>
         <item>Close your eyes. Breathe. Summon up that magic feeling of flow.</item>
@@ -67,4 +54,19 @@
         <item>Where does your muse live? In the shower? In your car? Pay a visit.</item>
         <item>Say it with me: "I am a writer. I’ve got this."</item>
     </array>
+    <string name="title_activity_scrolling_edit_text">Write</string>
+
+    <string name="your_words_here">Your words here…</string>
+    <string name="empty_wordcount">00</string>
+    <string name="add_word_count_button_description">Save your work and update your progress with
+        the current word count</string>
+    <string name="default_write_filename">Unitled</string>
+    <!-- Preference Titles -->
+
+    <!-- Messages Preferences -->
+
+    <!-- Sync Preferences -->
+    <string name="Write">Write</string>
+    <string name="statistics">Statistics</string>
+    <string name="untitled">untitled</string>
 </resources>
