@@ -38,7 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.MainFragmentBinding;
-import com.ryanschafer.authorgenie.datamodel.Goal;
+import com.ryanschafer.authorgenie.goals.Goal;
 import com.ryanschafer.authorgenie.ui.main.recyclerview.GoalListAdapter;
 import com.ryanschafer.authorgenie.ui.main.recyclerview.SwipeToDeleteCallback;
 
@@ -342,7 +342,7 @@ public class MainFragment extends Fragment {
     }
 
     private void cycleText() {
-        AppCompatTextView textView = (AppCompatTextView) binding.header;
+        AppCompatTextView textView = binding.header;
         String[] strArr = getResources().getStringArray(R.array.inspire_text);
         Random random = new Random();
         int index = random.nextInt(strArr.length);

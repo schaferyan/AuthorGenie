@@ -5,16 +5,11 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.widget.Toast;
 
-import androidx.lifecycle.LiveData;
-
-import com.ryanschafer.authorgenie.datamodel.Goal;
+import com.ryanschafer.authorgenie.goals.Goal;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class GoalStatusHandlerThread extends HandlerThread {
 

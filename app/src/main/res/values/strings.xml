@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AuthorGenie</string>
+    <string name="app_name">Author Genie</string>
     <string name="action_settings">Settings</string>
     <string name="submit">Add Goal</string>
     <string name="hint_new_goal">enter a number</string>
@@ -15,9 +15,10 @@
     <string name="about">About</string>
     <string name="about_section">
         About Author Genie:
-        \n For more information about AuthorGenie, visit <a href="http://www.authorgenie.net">authorgenie.net</a>
+        \n For more information about Author Genie, visit <a href="http://www.authorgenie.net">authorgenie.net</a>
         \n
         \n About the app:
+        \n Author Genie v1.1
         \n This application was coded in Java by Ryan Schafer.
         \n It is open source and can be used, modified and distributed freely as described under MIT
 

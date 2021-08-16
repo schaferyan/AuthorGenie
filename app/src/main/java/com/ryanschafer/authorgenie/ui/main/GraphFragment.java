@@ -9,7 +9,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import com.github.mikephil.charting.charts.LineChart;
 import android.view.LayoutInflater;
@@ -29,17 +28,14 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.FragmentGraphBinding;
-import com.ryanschafer.authorgenie.datamodel.Goal;
+import com.ryanschafer.authorgenie.goals.Goal;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class GraphFragment extends Fragment {
@@ -79,6 +75,7 @@ public class GraphFragment extends Fragment {
         mChart.setNoDataText("No goals or progress to show. Set goals and update your word or minute count" +
                 "from the main dashboard to see your progress over time");
         mChart.setNoDataTextColor(white);
+        mChart.setDescription(null);
         setUpSpinners();
         setUpGraph();
 

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
         android:fitsSystemWindows="true"
-        android:theme="@style/Theme.AuthorGenie3.AppBarOverlay">
+        android:theme="@style/Theme.AuthorGenie4.AppBarOverlay">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/Theme.AuthorGenie3.PopupOverlay">
+                app:popupTheme="@style/Theme.AuthorGenie4.PopupOverlay">
                 <TextView
                     android:id="@+id/wordcount"
                     android:layout_width="wrap_content"

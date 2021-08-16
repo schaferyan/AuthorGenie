@@ -16,12 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.ryanschafer.authorgenie.datamodel.Goal;
+import com.ryanschafer.authorgenie.goals.Goal;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.AddGoalFragmentBinding;
-import com.ryanschafer.authorgenie.ui.dialogs.ConfirmationDialogFragment;
 import com.ryanschafer.authorgenie.ui.dialogs.NotificationDialogFragment;
-import com.ryanschafer.authorgenie.ui.main.MainActivity;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;

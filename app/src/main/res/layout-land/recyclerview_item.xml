@@ -41,12 +41,14 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:layout_marginTop="@dimen/big_margin"
         android:layout_marginBottom="@dimen/small_margin"
-        android:layout_marginStart="@dimen/small_margin"/>
+        android:layout_marginStart="@dimen/small_margin"
+        android:maxWidth="100dp"/>
 
     <TextView
         android:id="@+id/progressNumbersRecyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxWidth="100dp"
         android:layout_marginEnd="@dimen/small_margin"
         android:text="@string/goal_numbers_placeholder"
         android:textSize="18sp"

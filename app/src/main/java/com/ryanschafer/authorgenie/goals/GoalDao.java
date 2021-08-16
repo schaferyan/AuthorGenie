@@ -1,6 +1,5 @@
-package com.ryanschafer.authorgenie.datamodel;
+package com.ryanschafer.authorgenie.goals;
 
-import androidx.annotation.BoolRes;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;

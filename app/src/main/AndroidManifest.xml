@@ -10,14 +10,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:theme="@style/Theme.AuthorGenie3"
+        android:theme="@style/Theme.AuthorGenie4"
         android:name = "androidx.multidex.MultiDexApplication">
 
 
         <activity
             android:name=".ui.wordprocessor.ScrollingEditTextActivity"
             android:label="@string/title_activity_scrolling_edit_text"
-            android:theme="@style/Theme.AuthorGenie3.NoActionBar"
+            android:theme="@style/Theme.AuthorGenie4.NoActionBar"
             android:windowSoftInputMode="adjustPan"
             />
 
