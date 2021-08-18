@@ -10,8 +10,9 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/big_margin"
+            android:paddingHorizontal="@dimen/big_padding"
             android:layout_marginVertical="@dimen/hugeMargin"
             android:fontFamily="sans-serif-light"
             android:text="@string/enter_a_word_or_minute_goal"
@@ -19,10 +20,9 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/edit_goal_amount"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.098" />
 
         <EditText
             android:id="@+id/edit_goal_amount"
