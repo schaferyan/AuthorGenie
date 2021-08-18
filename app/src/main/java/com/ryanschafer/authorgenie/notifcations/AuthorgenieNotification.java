@@ -1,11 +1,11 @@
-package com.ryanschafer.authorgenie.goals;
+package com.ryanschafer.authorgenie.notifcations;
 
-public class GoalNotification {
+public class AuthorgenieNotification {
 
         private final String message;
         private final String title;
 
-        public GoalNotification(String title, String message){
+        public AuthorgenieNotification(String title, String message){
             this.title = title;
             this.message = message;
         }

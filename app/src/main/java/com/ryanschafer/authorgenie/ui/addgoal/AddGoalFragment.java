@@ -15,11 +15,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.ryanschafer.authorgenie.goals.Goal;
+import com.ryanschafer.authorgenie.goal_data.Goal;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.AddGoalFragmentBinding;
-import com.ryanschafer.authorgenie.ui.dialogs.NotificationDialogFragment;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -142,14 +142,17 @@ public class AddGoalFragment extends Fragment {
     }
 
     private void onEmptyInput() {
-        NotificationDialogFragment iidf = NotificationDialogFragment.newInstance(1);
-        iidf.show(getChildFragmentManager(),"empty input");
+        Toast.makeText(
+                requireContext(), "Enter a number to set a goal",
+                Toast.LENGTH_LONG).show();
     }
 
 
     private void onInvalidInput() {
-        NotificationDialogFragment dialog = NotificationDialogFragment.newInstance(0);
-        dialog.show(getChildFragmentManager(),"invalid input");
+
+        Toast.makeText(
+                requireContext(), "Invalid input, numbers only please :)",
+                Toast.LENGTH_LONG).show();
     }
 
 

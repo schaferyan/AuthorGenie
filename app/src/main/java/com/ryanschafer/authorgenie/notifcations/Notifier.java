@@ -10,15 +10,10 @@ import android.content.SharedPreferences;
 import androidx.core.app.NotificationCompat;
 
 import com.ryanschafer.authorgenie.R;
-import com.ryanschafer.authorgenie.goals.Goal;
-import com.ryanschafer.authorgenie.goals.GoalDao;
-import com.ryanschafer.authorgenie.goals.GoalDatabase;
-import com.ryanschafer.authorgenie.goals.GoalNotification;
-import com.ryanschafer.authorgenie.goals.GoalRepository;
-import com.ryanschafer.authorgenie.goals.NotificationRepository;
+import com.ryanschafer.authorgenie.goal_data.Goal;
+import com.ryanschafer.authorgenie.goal_data.GoalRepository;
 import com.ryanschafer.authorgenie.ui.main.MainActivity;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -31,18 +26,18 @@ public class Notifier {
     private static final String LAST_USED_KEY = "Time last used in millis";
 
 
-    public static void sendReminders(Context context){
+    public static void sendReminders(Application application){
 
         NotificationManager mNotificationManager = (NotificationManager)
-                context.getSystemService(Context.NOTIFICATION_SERVICE);
-        GoalNotification[] notifications = buildReminders(context);
+                application.getSystemService(Context.NOTIFICATION_SERVICE);
+        AuthorgenieNotification[] notifications = buildReminders(application);
 
-            for(GoalNotification notification : notifications) {
+            for(AuthorgenieNotification notification : notifications) {
                 if(notification!=null) {
-                    Intent contentIntent = new Intent(context, MainActivity.class);
-                    PendingIntent pendingContentIntent = PendingIntent.getActivity(context, NOTIFICATION_ID, contentIntent,
+                    Intent contentIntent = new Intent(application, MainActivity.class);
+                    PendingIntent pendingContentIntent = PendingIntent.getActivity(application, NOTIFICATION_ID, contentIntent,
                             PendingIntent.FLAG_UPDATE_CURRENT);
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, PRIMARY_CHANNEL_ID)
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(application, PRIMARY_CHANNEL_ID)
                             .setSmallIcon(R.drawable.ic_notify_deadline)
                             .setContentTitle(notification.getTitle())
                             .setContentText(notification.getMessage())
@@ -56,13 +51,13 @@ public class Notifier {
                 }
             }
         }
-        private static GoalNotification[] buildReminders(Context context){
-            GoalRepository repository = new GoalRepository((Application) context.getApplicationContext());
-            SharedPreferences mPreferences = context.getSharedPreferences(MainActivity.prefFileName, Context.MODE_PRIVATE);
+        private static AuthorgenieNotification[] buildReminders(Application application){
+            GoalRepository repository = new GoalRepository(application);
+            SharedPreferences mPreferences = application.getSharedPreferences(MainActivity.prefFileName, Context.MODE_PRIVATE);
             Calendar calendar = Calendar.getInstance();
             long currentTime = calendar.getTimeInMillis();
             long lastUsed = mPreferences.getLong(LAST_USED_KEY, currentTime);
-            GoalNotification[] notifications = new GoalNotification[7];
+            AuthorgenieNotification[] notifications = new AuthorgenieNotification[7];
             final List<Goal> currentGoals = repository.getGoalsAsList();
             String title;
             String message;
@@ -74,7 +69,7 @@ public class Notifier {
                         if(currentTime - lastUsed > TimeUnit.HOURS.toMillis(2)) {
                             title = "Have you written today?";
                             message = "Don't forget to enter your progress!";
-                            notifications[0] = new GoalNotification(title, message);
+                            notifications[0] = new AuthorgenieNotification(title, message);
                         }
                         break;
                     case Goal.WEEK_WORD:
@@ -83,7 +78,7 @@ public class Notifier {
                                 && !goal.isMet()){
                             title = "Time is running out to meet your weekly" + goal.getDuration().toString() + "goal...";
                             message = "But you can do it! We believe in you!";
-                            notifications[goal.getGoalTypeId()] = new GoalNotification(title, message);
+                            notifications[goal.getGoalTypeId()] = new AuthorgenieNotification(title, message);
                         }
                         break;
                     case Goal.MONTH_TIME:
@@ -92,7 +87,7 @@ public class Notifier {
                                 && !goal.isMet()){
                             title = "Time is running out to meet your " + goal.getDuration().toString() + "goal...";
                             message = "Show that typewriter what you're made of!";
-                            notifications[goal.getGoalTypeId()] = new GoalNotification(title, message);
+                            notifications[goal.getGoalTypeId()] = new AuthorgenieNotification(title, message);
                         }
                         break;
                     default:

@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.goals;
+package com.ryanschafer.authorgenie.goal_data;
 
 import android.content.Context;
 
@@ -66,8 +66,8 @@ public abstract class GoalDatabase extends RoomDatabase {
                             "recurring INTEGER, PRIMARY KEY(id))");
             database.execSQL(
                     "INSERT INTO goal_table_new (id , deadline , objective , progress , " +
-                            "goalTypeId , name , current , notified) SELECT id , deadline , objective , progress , " +
-                            "goalTypeId , name , current , notified FROM goal_table"
+                            "goalTypeId , name , current) SELECT id , deadline , objective , progress , " +
+                            "goalTypeId , name , current FROM goal_table"
             );
             database.execSQL("DROP TABLE goal_table");
             database.execSQL("ALTER TABLE goal_table_new RENAME TO goal_table");

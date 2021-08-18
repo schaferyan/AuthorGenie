@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.goals;
+package com.ryanschafer.authorgenie.goal_data;
 
 import android.app.Application;
 
@@ -60,6 +60,8 @@ public class GoalRepository {
 
         return new ArrayList<>(goalDao.getCurrentGoalsAsList());
     }
+
+
 
     public LiveData<List<Goal>> getAllGoals() {
         return allGoals;

@@ -70,4 +70,6 @@
     <string name="Write">Write</string>
     <string name="statistics">Statistics</string>
     <string name="untitled">untitled</string>
+    <string name="word_count">word count</string>
+    <string name="document_title">document title</string>
 </resources>

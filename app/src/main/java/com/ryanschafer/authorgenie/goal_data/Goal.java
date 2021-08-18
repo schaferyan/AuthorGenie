@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.goals;
+package com.ryanschafer.authorgenie.goal_data;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

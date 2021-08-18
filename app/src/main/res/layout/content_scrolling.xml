@@ -14,6 +14,7 @@
         android:layout_margin="@dimen/text_margin"
         android:id="@+id/textbox"
         android:hint="@string/your_words_here"
+        android:minHeight="48dp"
         tools:ignore="Autofill"
         android:inputType = "textMultiLine" />
 

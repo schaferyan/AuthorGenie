@@ -4,7 +4,7 @@
         <SwitchPreferenceCompat
             app:key="SoundFX"
             app:title="Play sound effects"
-            app:defaultValue="true"/>
+            app:defaultValue="true" />
 
     </PreferenceCategory>
 

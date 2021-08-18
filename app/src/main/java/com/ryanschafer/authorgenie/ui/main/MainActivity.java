@@ -37,6 +37,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.ryanschafer.authorgenie.background.AlarmReceiver;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.MainActivityBinding;
+import com.ryanschafer.authorgenie.settings.SettingsFragment;
+import com.ryanschafer.authorgenie.statistics.GraphFragment;
 import com.ryanschafer.authorgenie.ui.about.About;
 import com.ryanschafer.authorgenie.ui.addgoal.AddGoalFragment;
 import com.ryanschafer.authorgenie.background.GoalStatusHandlerThread;
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     private GraphFragment mGraphFragment;
     private SettingsFragment mSettingsFragment;
 
-    boolean mFirstTime;
+
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>(){
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         mPreferences = getSharedPreferences(prefFileName, MODE_PRIVATE);
-        mFirstTime = mPreferences.getBoolean(FIRST_TIME_KEY, true);
+
 
         androidx.appcompat.widget.Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
@@ -185,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         else if(mSettingsFragment != null){
             showSettings();
         }
-        if(mFirstTime){
+        if(mPreferences.getBoolean(FIRST_TIME_KEY, true)){
             mPreferences.edit().putBoolean(FIRST_TIME_KEY, false).apply();
             showAddGoalFragment();
         }

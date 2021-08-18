@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ryanschafer.authorgenie.goals.Goal;
+import com.ryanschafer.authorgenie.goal_data.Goal;
 import com.ryanschafer.authorgenie.R;
 
 import java.text.DateFormat;

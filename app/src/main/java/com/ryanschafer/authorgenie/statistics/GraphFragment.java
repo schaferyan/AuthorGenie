@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.ui.main;
+package com.ryanschafer.authorgenie.statistics;
 
 import android.os.Bundle;
 
@@ -28,7 +28,8 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.FragmentGraphBinding;
-import com.ryanschafer.authorgenie.goals.Goal;
+import com.ryanschafer.authorgenie.goal_data.Goal;
+import com.ryanschafer.authorgenie.ui.main.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,9 +40,9 @@ import java.util.List;
 
 
 public class GraphFragment extends Fragment {
-    FragmentGraphBinding binding;
-    MainViewModel mViewModel;
-    LineChart mChart;
+    private FragmentGraphBinding binding;
+    private MainViewModel mViewModel;
+    private LineChart mChart;
 
 
     public GraphFragment() {

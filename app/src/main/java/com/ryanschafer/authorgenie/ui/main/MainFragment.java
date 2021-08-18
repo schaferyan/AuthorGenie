@@ -38,7 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.MainFragmentBinding;
-import com.ryanschafer.authorgenie.goals.Goal;
+import com.ryanschafer.authorgenie.goal_data.Goal;
 import com.ryanschafer.authorgenie.ui.main.recyclerview.GoalListAdapter;
 import com.ryanschafer.authorgenie.ui.main.recyclerview.SwipeToDeleteCallback;
 

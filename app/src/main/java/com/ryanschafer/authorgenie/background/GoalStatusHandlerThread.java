@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.widget.Toast;
 
-import com.ryanschafer.authorgenie.goals.Goal;
+import com.ryanschafer.authorgenie.goal_data.Goal;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
 
 import java.util.Calendar;
@@ -45,7 +45,7 @@ public class GoalStatusHandlerThread extends HandlerThread {
                                 message = "You exceeded your goal by " + (goal.getProgress() -
                                         goal.getObjective()) + "!";
                             } else if (goal.isMet()) {
-                                message = goal.getName() + " completed, congratulations!";
+                                message = goal.getName() + " you achieved your goal, congratulations!";
                             }
                             if (message != null) {
                                 showToast(message);

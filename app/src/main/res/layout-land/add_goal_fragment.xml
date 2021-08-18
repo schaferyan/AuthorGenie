@@ -11,8 +11,8 @@
         <EditText
             android:id="@+id/edit_goal_amount"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="@color/teal_700"
             android:fontFamily="sans-serif-light"
             android:hint="@string/enter_a_word_or_minute_goal"
@@ -30,7 +30,7 @@
         <Spinner
             android:id="@+id/goal_type_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="@dimen/big_margin"
             android:backgroundTint="@color/teal_200"
             android:fontFamily="sans-serif-light"
@@ -45,7 +45,7 @@
         <Spinner
             android:id="@+id/goal_duration_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="@dimen/big_margin"
             android:backgroundTint="@color/teal_200"
             android:textColor="@color/white"
@@ -56,7 +56,7 @@
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/freqSwitch"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:checked="true"
             android:text="@string/recurring"
             android:textColor="@color/white"

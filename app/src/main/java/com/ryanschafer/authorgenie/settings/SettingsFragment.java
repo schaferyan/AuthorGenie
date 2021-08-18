@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.ui.main;
+package com.ryanschafer.authorgenie.settings;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.ryanschafer.authorgenie.R;
+import com.ryanschafer.authorgenie.ui.main.MainActivity;
 
 import org.jetbrains.annotations.NotNull;
 
