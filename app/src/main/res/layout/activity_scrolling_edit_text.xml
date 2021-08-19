@@ -45,6 +45,14 @@
                     android:hint="@string/document_title"
                     android:importantForAutofill="no"
                     android:inputType="text"
+                    android:labelFor="@+id/document_title_label"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    android:text="@string/document_title"
+                    android:id="@+id/document_title_label"
                     />
             </androidx.appcompat.widget.Toolbar>
 

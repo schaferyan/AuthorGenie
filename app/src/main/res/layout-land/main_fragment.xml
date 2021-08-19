@@ -146,6 +146,7 @@
         android:id="@+id/instructions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:layout_margin="@dimen/big_margin"
         android:background="@color/purple_dark"
         android:padding="@dimen/smallPadding"

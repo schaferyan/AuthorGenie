@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -51,7 +50,6 @@ import java.util.Random;
 
 public class MainFragment extends Fragment {
 
-    private static final String FOOTER_PREF_KEY = "footer_pref_key";
     private static final String INSTRUCTIONS_SEEN_KEY = "instructions_seen_key";
     private static final String SHOW_FOOTER_KEY = "show_footer_if_empty";
     public static String words_counted_name = "words_counted_in_word_counter";
@@ -87,9 +85,10 @@ public class MainFragment extends Fragment {
         submitButton = binding.addProgressButton;
         spinner = binding.spinner;
         mPreferences = requireContext().getSharedPreferences(MainActivity.prefFileName, MainActivity.MODE_PRIVATE);
+
         if(savedInstanceState != null) {
             boolean showFooter = savedInstanceState.getBoolean(SHOW_FOOTER_KEY);
-            setShowFooter(showFooter);
+            setShowAuthorGenieButton(showFooter);
         }
         ArrayList<String> types = new ArrayList<>();
         for(String type : Goal.getGoalTypes()){
@@ -107,11 +106,7 @@ public class MainFragment extends Fragment {
 
 
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
 
-        return super.onOptionsItemSelected(item);
-    }
 
 
 
@@ -198,8 +193,8 @@ public class MainFragment extends Fragment {
 
     private void onDataSetChanged(List<Goal> goals) {
         adapter.submitList(goals);
-        boolean showFooter = goals.isEmpty();
-        setShowFooter(showFooter);
+        boolean showAuthorGenieButton = goals.isEmpty();
+        setShowAuthorGenieButton(showAuthorGenieButton);
     }
 
     private void hideInstructions() {
@@ -230,7 +225,7 @@ public class MainFragment extends Fragment {
 
                 mViewModel.removeGoal(selectedGoal);
                 if(adapter.getCurrentList().isEmpty()){
-                    setShowFooter(true);
+                    setShowAuthorGenieButton(true);
                 }
 
                 Snackbar snackbar = Snackbar
@@ -332,7 +327,7 @@ public class MainFragment extends Fragment {
     }
 
 
-    public void setShowFooter(boolean show){
+    public void setShowAuthorGenieButton(boolean show){
         View textView = binding.authorGenieButton;
         if(show) {
             textView.setVisibility(View.VISIBLE);

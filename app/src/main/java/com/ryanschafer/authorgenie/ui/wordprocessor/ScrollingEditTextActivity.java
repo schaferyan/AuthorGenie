@@ -197,6 +197,7 @@ public class ScrollingEditTextActivity extends AppCompatActivity {
     }
 
     private void alterDocument(Uri uri) {
+//        TODO move this to a method outside the activity class
         try {
             ParcelFileDescriptor pfd = this.getContentResolver().
                     openFileDescriptor(uri, "w");

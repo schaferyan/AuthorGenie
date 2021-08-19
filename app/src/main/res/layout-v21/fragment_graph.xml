@@ -13,7 +13,7 @@
         android:layout_margin="@dimen/big_margin"
         android:backgroundTint="@color/teal_200"
         android:fontFamily="sans-serif-light"
-        android:minHeight="@dimen/min_height"
+        android:minHeight="48dp"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/chart"
@@ -22,7 +22,7 @@
     <Spinner
         android:backgroundTint="@color/teal_200"
         android:fontFamily="sans-serif-light"
-        android:minHeight="@dimen/min_height"
+        android:minHeight="48dp"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:id="@+id/duration_spinner_2"
