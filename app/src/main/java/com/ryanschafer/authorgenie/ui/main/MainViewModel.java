@@ -87,4 +87,6 @@ public class MainViewModel extends AndroidViewModel {
     public void setCachedGoals(List<Goal> cachedGoals) {
         this.cachedGoals = cachedGoals;
     }
+
+
 }

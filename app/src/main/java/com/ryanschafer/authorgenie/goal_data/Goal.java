@@ -351,4 +351,12 @@ public class Goal {
     public void setRecurring(boolean recurring) {
         this.recurring = recurring;
     }
+
+    public static ArrayList<String> getPluralGoalTypes(){
+        ArrayList<String> types = new ArrayList<>();
+        for(String type : Goal.getGoalTypes()){
+            types.add(type + "s");
+        }
+        return types;
+    }
 }

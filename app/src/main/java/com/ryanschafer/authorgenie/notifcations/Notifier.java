@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Notifier {
-    private NotificationManager mNotificationManager;
     private static final int NOTIFICATION_ID = 0;
     private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
     private static final String NOTIFICATION_GROUP_ID_GOAL_REMINDERS = "goal reminders";
@@ -28,7 +27,7 @@ public class Notifier {
 
     public static void sendReminders(Application application){
 
-        NotificationManager mNotificationManager = (NotificationManager)
+        NotificationManager notificationManager = (NotificationManager)
                 application.getSystemService(Context.NOTIFICATION_SERVICE);
         AuthorgenieNotification[] notifications = buildReminders(application);
 
@@ -47,7 +46,7 @@ public class Notifier {
                             .setGroup(NOTIFICATION_GROUP_ID_GOAL_REMINDERS)
                             .setTimeoutAfter(TimeUnit.DAYS.toMillis(1/2))
                             .setDefaults(NotificationCompat.DEFAULT_ALL);
-                    mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+                    notificationManager.notify(NOTIFICATION_ID, builder.build());
                 }
             }
         }
@@ -66,11 +65,11 @@ public class Notifier {
                 switch (typeId){
                     case Goal.DAY_WORD:
                     case Goal.DAY_TIME:
-                        if(currentTime - lastUsed > TimeUnit.HOURS.toMillis(2)) {
+//                        if(currentTime - lastUsed > TimeUnit.HOURS.toMillis(2)) {
                             title = "Have you written today?";
                             message = "Don't forget to enter your progress!";
                             notifications[0] = new AuthorgenieNotification(title, message);
-                        }
+//                        }
                         break;
                     case Goal.WEEK_WORD:
                     case Goal.WEEK_TIME:

@@ -90,30 +90,20 @@ public class MainFragment extends Fragment {
             boolean showFooter = savedInstanceState.getBoolean(SHOW_FOOTER_KEY);
             setShowAuthorGenieButton(showFooter);
         }
-        ArrayList<String> types = new ArrayList<>();
-        for(String type : Goal.getGoalTypes()){
-            types.add(type + "s");
-        }
 
+        setUpSpinner();
+        return binding.getRoot();
+    }
+
+    private void setUpSpinner(){
         spinnerAdapter = new ArrayAdapter<>(getContext(),
-                R.layout.spinner_item, types);
+                R.layout.spinner_item, Goal.getPluralGoalTypes());
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
-        return binding.getRoot();
-
-
     }
 
 
-
-
-
-
-
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private void setUpRecyclerView(){
         RecyclerView recyclerView = binding.recyclerview;
         adapter = new GoalListAdapter(new GoalListAdapter.GoalDiff());
         recyclerView.setAdapter(adapter);
@@ -121,7 +111,9 @@ public class MainFragment extends Fragment {
         enableSwipeToDeleteAndUndo();
         mViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         mViewModel.getCurrentGoals().observe(getViewLifecycleOwner(), this::onDataSetChanged);
+    }
 
+    private void setUpEditText(){
         binding.enterProgressEditText.setImeActionLabel("Update", KeyEvent.KEYCODE_ENTER);
         binding.enterProgressEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
         binding.enterProgressEditText.setOnEditorActionListener((v, actionId, event) -> {
@@ -136,6 +128,16 @@ public class MainFragment extends Fragment {
                 hideKeyboard(v);
             }
         });
+    }
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setUpRecyclerView();
+        setUpEditText();
+
         submitButton.setOnClickListener(v -> addProgress());
         binding.newGoalButton.setOnClickListener( v -> ((MainActivity) requireActivity()).showAddGoalFragment());
         TextView linkTextView = binding.authorGenieButton;

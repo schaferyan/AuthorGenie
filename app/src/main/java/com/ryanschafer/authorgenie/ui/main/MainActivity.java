@@ -61,14 +61,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String WORDS_COUNTED_NAME = "words_counted_in_word_counter";
     private static final String WORDS_COUNTED_KEY = WORDS_COUNTED_NAME;
     private static final String SETTINGS_FRAGMENT_KEY = "SettingsFragment";
+    public static final String prefFileName = "com.ryanschafer.authorgenie4";
 
     private MainActivityBinding binding;
     private MainViewModel mViewModel;
     private GoalStatusHandlerThread mHandlerThread;
     private NotificationManager mNotificationManager;
     private SharedPreferences mPreferences;
-    public static final String prefFileName = "com.ryanschafer.authorgenie4";
-    boolean mNotifyInit;
     private AddGoalFragment mAddGoalFragment;
     private GraphFragment mGraphFragment;
     private SettingsFragment mSettingsFragment;
@@ -106,17 +105,9 @@ public class MainActivity extends AppCompatActivity {
 
         handleInsets(root);
         createNotificationChannel();
-        updateLastUsed();
         scheduleAlarms();
         setupToolbar();
         manageFragments(savedInstanceState);
-    }
-
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     @Override
@@ -124,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         mHandlerThread = new GoalStatusHandlerThread("handler-thread", mViewModel, this);
         mHandlerThread.start();
+        updateLastUsed();
     }
 
     @Override
@@ -273,18 +265,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void scheduleAlarms() {
         Intent notifyIntent = new Intent(this, AlarmReceiver.class);
-        mNotifyInit = PendingIntent.getBroadcast(this, NOTIFICATION_ID, notifyIntent,
-                PendingIntent.FLAG_NO_CREATE) != null;
-
-        if (!mNotifyInit) {
             PendingIntent notifyPendingIntent = PendingIntent.getBroadcast(this,
                     NOTIFICATION_ID, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-            if (alarmManager != null) {
                 alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(),
-                        AlarmManager.INTERVAL_HALF_DAY / 2, notifyPendingIntent);
-            }
-        }
+                        AlarmManager.INTERVAL_FIFTEEN_MINUTES / 15, notifyPendingIntent);
     }
 
     public void showFragment(Fragment fragment) {

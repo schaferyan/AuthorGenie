@@ -21,8 +21,6 @@ public class GoalRepository {
     public GoalRepository(Application application){
         GoalDatabase db = GoalDatabase.getInstance(application);
         goalDao = db.goalDao();
-//        Calendar calendar = Calendar.getInstance();
-//        long timeInMillis = calendar.getTimeInMillis();
         goals = goalDao.getCurrentGoals();
         allGoals = goalDao.getAllGoals();
     }
