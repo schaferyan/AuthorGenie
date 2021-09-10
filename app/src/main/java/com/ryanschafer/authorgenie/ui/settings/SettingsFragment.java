@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.settings;
+package com.ryanschafer.authorgenie.ui.settings;
 
 import android.os.Build;
 import android.os.Bundle;

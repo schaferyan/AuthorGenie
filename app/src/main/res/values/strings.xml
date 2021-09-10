@@ -73,4 +73,12 @@
     <string name="word_count">word count</string>
     <string name="document_title">document title</string>
     <string name="recycler_view_label">Your current goals:</string>
+    <string name="new_label">New</string>
+    <string name="total">Total</string>
+    <string name="goals">Goals</string>
+    <string name="projects">Projects</string>
+    <string name="entry_mode">Entry Mode:</string>
+    <string name="title_activity_add">AddActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

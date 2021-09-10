@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.statistics;
+package com.ryanschafer.authorgenie.ui.statistics;
 
 import android.os.Bundle;
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".statistics.GraphFragment">
+    tools:context=".ui.statistics.GraphFragment">
 
     <Spinner
         android:id="@+id/type_spinner_2"

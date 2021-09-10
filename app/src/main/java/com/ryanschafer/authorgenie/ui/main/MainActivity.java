@@ -38,8 +38,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.ryanschafer.authorgenie.background.AlarmReceiver;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.MainActivityBinding;
-import com.ryanschafer.authorgenie.settings.SettingsFragment;
-import com.ryanschafer.authorgenie.statistics.GraphFragment;
+import com.ryanschafer.authorgenie.ui.settings.SettingsFragment;
+import com.ryanschafer.authorgenie.ui.statistics.GraphFragment;
 import com.ryanschafer.authorgenie.ui.about.About;
 import com.ryanschafer.authorgenie.ui.addgoal.AddGoalFragment;
 import com.ryanschafer.authorgenie.background.GoalStatusHandlerThread;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String WORDS_COUNTED_NAME = "words_counted_in_word_counter";
     private static final String WORDS_COUNTED_KEY = WORDS_COUNTED_NAME;
     private static final String SETTINGS_FRAGMENT_KEY = "SettingsFragment";
-    public static final String prefFileName = "com.ryanschafer.authorgenie4";
+    public static final String prefFileName = "com.ryanschafer.authorgenie";
 
     private MainActivityBinding binding;
     private MainViewModel mViewModel;
@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
                     NOTIFICATION_ID, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
                 alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(),
-                        AlarmManager.INTERVAL_FIFTEEN_MINUTES / 15, notifyPendingIntent);
+                        AlarmManager.INTERVAL_HALF_DAY/2, notifyPendingIntent);
     }
 
     public void showFragment(Fragment fragment) {

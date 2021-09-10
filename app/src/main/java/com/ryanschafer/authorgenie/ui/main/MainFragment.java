@@ -15,14 +15,17 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -43,7 +46,6 @@ import com.ryanschafer.authorgenie.ui.main.recyclerview.SwipeToDeleteCallback;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -59,7 +61,12 @@ public class MainFragment extends Fragment {
     GoalListAdapter adapter;
     ArrayAdapter<String> spinnerAdapter;
     Button submitButton;
-    Spinner spinner;
+    Spinner entrySpinner;
+    SwitchCompat entryMethodSwitch;
+    Spinner projectSpinner;
+    ToggleButton goalsTab;
+    ToggleButton projectsTab;
+    Spinner recViewSpinner;
     MediaPlayer mediaPlayer;
     SharedPreferences mPreferences;
 
@@ -75,7 +82,6 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -83,23 +89,90 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = MainFragmentBinding.inflate(inflater, container, false);
         submitButton = binding.addProgressButton;
-        spinner = binding.spinner;
+        entrySpinner = binding.spinner;
         mPreferences = requireContext().getSharedPreferences(MainActivity.prefFileName, MainActivity.MODE_PRIVATE);
-
+        recViewSpinner = binding.recViewSpinner;
+        entryMethodSwitch = binding.switch1;
+        projectSpinner = binding.projectSpinner;
+        goalsTab = binding.toggleButton;
+        projectsTab = binding.toggleButton2;
         if(savedInstanceState != null) {
             boolean showFooter = savedInstanceState.getBoolean(SHOW_FOOTER_KEY);
             setShowAuthorGenieButton(showFooter);
         }
 
-        setUpSpinner();
+        setUpEntrySpinner();
+        setUpRecViewSpinner();
+        setUpProjectSpinner();
+        setupTabs();
+        setupSwitch();
         return binding.getRoot();
     }
 
-    private void setUpSpinner(){
+    private void setUpProjectSpinner() {
+    }
+
+    private void setupSwitch() {
+
+        entryMethodSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(entryMethodSwitch.isChecked()){
+                    entryMethodSwitch.setText(entryMethodSwitch.getTextOn());
+                }else{
+                    entryMethodSwitch.setText(entryMethodSwitch.getTextOff());
+                }
+            }
+        });
+    }
+
+    private void setupTabs() {
+        goalsTab.setChecked(true);
+        goalsTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goalsTab.setChecked(true);
+                projectsTab.setChecked(false);
+            }
+        });
+        projectsTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                projectsTab.setChecked(true);
+                goalsTab.setChecked(false);
+            }
+        });
+        goalsTab.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setButtonColor(buttonView, isChecked);
+            }
+        });
+
+        projectsTab.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setButtonColor(buttonView, isChecked);
+            }
+        });
+    }
+
+    private void setButtonColor(CompoundButton buttonView, boolean isChecked) {
+        if(isChecked){
+            buttonView.setBackgroundColor(getResources().getColor(R.color.teal_200));
+        }else{
+            buttonView.setBackgroundColor(getResources().getColor(R.color.teal_700));
+        }
+    }
+
+    private void setUpRecViewSpinner() {
+    }
+
+    private void setUpEntrySpinner(){
         spinnerAdapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item, Goal.getPluralGoalTypes());
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
+        entrySpinner.setAdapter(spinnerAdapter);
     }
 
 
@@ -259,7 +332,7 @@ public class MainFragment extends Fragment {
             Toast.makeText(requireContext(), "You must enter a number to submit progress", Toast.LENGTH_LONG).show();
             return;
         }
-        Goal.TYPE inputType = Goal.TYPE.values()[spinner.getSelectedItemPosition()];
+        Goal.TYPE inputType = Goal.TYPE.values()[entrySpinner.getSelectedItemPosition()];
         String message = null;
         int[] sounds = new int[2];
 

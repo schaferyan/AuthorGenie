@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainFragmentConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -68,18 +69,18 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95">
+        app:layout_constraintVertical_bias="0.7">
 
         <EditText
             android:id="@+id/enterProgressEditText"
             android:layout_width="115dp"
             android:layout_height="50dp"
-            android:hint="@string/progress_hint"
-            android:textAlignment="center"
             android:gravity="center"
+            android:hint="@string/progress_hint"
             android:importantForAutofill="no"
             android:inputType="number"
             android:paddingHorizontal="@dimen/smallPadding"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/black"
 
@@ -104,6 +105,25 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/spinnerWrapper2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/progress_input_background"
+        app:layout_constraintBottom_toTopOf="@+id/addProgressButton"
+        app:layout_constraintTop_toBottomOf="@id/spinnerWrapper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.1">
+
+        <Spinner
+            android:id="@+id/projectSpinner"
+            android:layout_width="115dp"
+            android:layout_height="50dp"
+            android:paddingHorizontal="@dimen/smallPadding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+    </RelativeLayout>
+
     <Button
         android:id="@+id/addProgressButton"
         android:layout_width="match_parent"
@@ -113,9 +133,10 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.312"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -134,7 +155,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton2"
         app:layout_constraintVertical_bias="0" />
 
     <TextView
@@ -165,7 +186,47 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_200"
+        android:text="@string/goals"
+        android:textOff="@string/goals"
+        android:textOn="@string/goals"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
+    <ToggleButton
+        android:id="@+id/toggleButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:background="@color/teal_700"
+        android:text="@string/projects"
+        android:textOff="@string/projects"
+        android:textOn="@string/projects"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <Spinner
+        android:id="@+id/recViewSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton2" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/entry_mode"
+        android:textOff="@string/new_label"
+        android:textOn="@string/total"
+        app:layout_constraintEnd_toEndOf="@+id/editTextWrapper"
+        app:layout_constraintStart_toStartOf="@+id/editTextWrapper"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWrapper" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

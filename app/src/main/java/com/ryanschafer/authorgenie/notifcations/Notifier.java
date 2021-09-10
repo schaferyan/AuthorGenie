@@ -65,11 +65,11 @@ public class Notifier {
                 switch (typeId){
                     case Goal.DAY_WORD:
                     case Goal.DAY_TIME:
-//                        if(currentTime - lastUsed > TimeUnit.HOURS.toMillis(2)) {
+                        if(currentTime - lastUsed > TimeUnit.HOURS.toMillis(2)) {
                             title = "Have you written today?";
                             message = "Don't forget to enter your progress!";
                             notifications[0] = new AuthorgenieNotification(title, message);
-//                        }
+                        }
                         break;
                     case Goal.WEEK_WORD:
                     case Goal.WEEK_TIME:
