@@ -41,7 +41,7 @@ import com.ryanschafer.authorgenie.databinding.MainActivityBinding;
 import com.ryanschafer.authorgenie.ui.settings.SettingsFragment;
 import com.ryanschafer.authorgenie.ui.statistics.GraphFragment;
 import com.ryanschafer.authorgenie.ui.about.About;
-import com.ryanschafer.authorgenie.ui.addgoal.AddGoalFragment;
+import com.ryanschafer.authorgenie.ui.add.AddTabManagerFragment;
 import com.ryanschafer.authorgenie.background.GoalStatusHandlerThread;
 import com.ryanschafer.authorgenie.ui.wordprocessor.ScrollingEditTextActivity;
 
@@ -52,7 +52,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String ADD_GOAL_FRAGMENT_KEY = "AddGoalFragment";
+    private static final String ADD_GOAL_FRAGMENT_KEY = "AddTabManagerFragment";
     private static final String LAST_USED_KEY = "Time last used in millis";
     private static final String GRAPH_FRAGMENT_KEY = "GraphFragment";
     private static final int NOTIFICATION_ID = 0;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private GoalStatusHandlerThread mHandlerThread;
     private NotificationManager mNotificationManager;
     private SharedPreferences mPreferences;
-    private AddGoalFragment mAddGoalFragment;
+    private AddTabManagerFragment mAddTabManagerFragment;
     private GraphFragment mGraphFragment;
     private SettingsFragment mSettingsFragment;
     private final ActivityResultLauncher<Intent> launcher = registerForActivityResult(
@@ -141,9 +141,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NotNull Bundle outState) {
         super.onSaveInstanceState(outState);
         FragmentManager supportFragmentManager = getSupportFragmentManager();
-        if (mAddGoalFragment != null && mAddGoalFragment.isAdded()) {
+        if (mAddTabManagerFragment != null && mAddTabManagerFragment.isAdded()) {
             try {
-                supportFragmentManager.putFragment(outState, ADD_GOAL_FRAGMENT_KEY, mAddGoalFragment);
+                supportFragmentManager.putFragment(outState, ADD_GOAL_FRAGMENT_KEY, mAddTabManagerFragment);
             } catch (IllegalStateException | NullPointerException e) {
                 e.printStackTrace();
             }
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             //Restore fragment instances
             FragmentManager supportFragmentManager = getSupportFragmentManager();
-            mAddGoalFragment = (AddGoalFragment) supportFragmentManager
+            mAddTabManagerFragment = (AddTabManagerFragment) supportFragmentManager
                     .getFragment(savedInstanceState, ADD_GOAL_FRAGMENT_KEY);
             mGraphFragment = (GraphFragment) supportFragmentManager
                     .getFragment(savedInstanceState, GRAPH_FRAGMENT_KEY);
@@ -218,8 +218,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean showRestoredFragmentInstances(){
-        if (mAddGoalFragment != null) {
-            showAddGoalFragment();
+        if (mAddTabManagerFragment != null) {
+            showAddTabManagerFragment();
             return true;
         } else if (mGraphFragment != null) {
             showProgress();
@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
     private void firstTimeCheck(){
         if (mPreferences.getBoolean(FIRST_TIME_KEY, true)) {
             mPreferences.edit().putBoolean(FIRST_TIME_KEY, false).apply();
-            showAddGoalFragment();
+            showAddTabManagerFragment();
         }
     }
 
@@ -291,11 +291,11 @@ public class MainActivity extends AppCompatActivity {
         showFragment(About.newInstance());
     }
 
-    public void showAddGoalFragment() {
-        if (mAddGoalFragment == null) {
-            mAddGoalFragment = AddGoalFragment.newInstance();
+    public void showAddTabManagerFragment() {
+        if (mAddTabManagerFragment == null) {
+            mAddTabManagerFragment = AddTabManagerFragment.newInstance();
         }
-        showFragment(mAddGoalFragment);
+        showFragment(mAddTabManagerFragment);
     }
 
     private void showProgress() {

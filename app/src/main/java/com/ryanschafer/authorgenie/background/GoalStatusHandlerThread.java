@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.widget.Toast;
 
-import com.ryanschafer.authorgenie.goal_data.Goal;
+import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
 
 import java.util.Calendar;

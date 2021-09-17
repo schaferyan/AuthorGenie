@@ -40,7 +40,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.MainFragmentBinding;
-import com.ryanschafer.authorgenie.goal_data.Goal;
+import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.ui.main.recyclerview.GoalListAdapter;
 import com.ryanschafer.authorgenie.ui.main.recyclerview.SwipeToDeleteCallback;
 
@@ -212,7 +212,7 @@ public class MainFragment extends Fragment {
         setUpEditText();
 
         submitButton.setOnClickListener(v -> addProgress());
-        binding.newGoalButton.setOnClickListener( v -> ((MainActivity) requireActivity()).showAddGoalFragment());
+        binding.newGoalButton.setOnClickListener( v -> ((MainActivity) requireActivity()).showAddTabManagerFragment());
         TextView linkTextView = binding.authorGenieButton;
         linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
         linkTextView.setLinkTextColor(ContextCompat.getColor(requireContext(), R.color.purple_light));

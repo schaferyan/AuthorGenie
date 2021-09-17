@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import com.ryanschafer.authorgenie.goal_data.Goal;
+import com.ryanschafer.authorgenie.data.goals.Goal;
 
 public class GoalListAdapter extends ListAdapter<Goal, GoalViewHolder> {
 

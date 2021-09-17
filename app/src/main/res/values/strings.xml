@@ -81,4 +81,10 @@
     <string name="title_activity_add">AddActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="enter_a_name_for_your_project">Enter a name for your project</string>
+    <string name="target_wordcount_hint">target wordcount</string>
+    <string name="submit_project">Add Project</string>
+    <string name="create_a_project_instructions">Create a project to keep track of your work</string>
+    <string name="new_goal">New Goal</string>
+    <string name="new_project">New Project</string>
 </resources>

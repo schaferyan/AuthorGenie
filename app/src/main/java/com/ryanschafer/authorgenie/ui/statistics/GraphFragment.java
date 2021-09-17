@@ -28,7 +28,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.FragmentGraphBinding;
-import com.ryanschafer.authorgenie.goal_data.Goal;
+import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;

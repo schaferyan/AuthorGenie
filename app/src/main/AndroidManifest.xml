@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.AuthorGenie4">
-
         <activity
             android:name=".ui.wordprocessor.ScrollingEditTextActivity"
             android:label="@string/title_activity_scrolling_edit_text"

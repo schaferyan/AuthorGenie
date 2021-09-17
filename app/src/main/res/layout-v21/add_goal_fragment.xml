@@ -4,6 +4,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,17 +13,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/big_margin"
-            android:paddingHorizontal="@dimen/big_padding"
             android:layout_marginVertical="@dimen/hugeMargin"
             android:fontFamily="sans-serif-light"
+
             android:text="@string/enter_a_word_or_minute_goal"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/edit_goal_amount"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.098" />
+            app:layout_constraintVertical_bias="0.668" />
 
         <EditText
             android:id="@+id/edit_goal_amount"
@@ -57,23 +59,33 @@
             android:layout_height="48dp"
             android:layout_margin="16dp"
             android:backgroundTint="@color/teal_200"
+            app:layout_constraintBottom_toTopOf="@+id/goal_duration_spinner2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/goal_duration_spinner2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/teal_200"
             app:layout_constraintBottom_toTopOf="@+id/freqSwitch"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/freqSwitch"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:checked="true"
-            android:text="@string/recurring"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/white"
             android:layout_margin="@dimen/big_margin"
-            android:id="@+id/freqSwitch"
+            android:checked="true"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/recurring"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/button_submit_goal"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/button_submit_goal"
@@ -87,7 +99,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.693" />
+            app:layout_constraintVertical_bias="0.894" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

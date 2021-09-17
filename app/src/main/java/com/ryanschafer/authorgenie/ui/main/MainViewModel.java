@@ -3,8 +3,8 @@ package com.ryanschafer.authorgenie.ui.main;
 import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import com.ryanschafer.authorgenie.goal_data.Goal;
-import com.ryanschafer.authorgenie.goal_data.GoalRepository;
+import com.ryanschafer.authorgenie.data.goals.Goal;
+import com.ryanschafer.authorgenie.data.goals.GoalRepository;
 
 import java.util.ArrayList;
 import java.util.List;

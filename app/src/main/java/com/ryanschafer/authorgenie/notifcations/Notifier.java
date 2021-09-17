@@ -10,8 +10,8 @@ import android.content.SharedPreferences;
 import androidx.core.app.NotificationCompat;
 
 import com.ryanschafer.authorgenie.R;
-import com.ryanschafer.authorgenie.goal_data.Goal;
-import com.ryanschafer.authorgenie.goal_data.GoalRepository;
+import com.ryanschafer.authorgenie.data.goals.Goal;
+import com.ryanschafer.authorgenie.data.goals.GoalRepository;
 import com.ryanschafer.authorgenie.ui.main.MainActivity;
 
 import java.util.Calendar;

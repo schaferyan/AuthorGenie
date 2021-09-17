@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.ui.addgoal;
+package com.ryanschafer.authorgenie.ui.add;
 
 import android.os.Bundle;
 
@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.ryanschafer.authorgenie.goal_data.Goal;
+import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.databinding.AddGoalFragmentBinding;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
