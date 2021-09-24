@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.data.goals.GoalRepository;
+import com.ryanschafer.authorgenie.data.projects.Project;
+import com.ryanschafer.authorgenie.data.projects.ProjectRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class MainViewModel extends AndroidViewModel {
     private final LiveData<List<Goal>> currentGoals;
     private final LiveData<List<Goal>> allGoals;
     private final GoalRepository goalRepository;
+    private final ProjectRepository projectRepository;
     private List<Goal> cachedGoals;
 
 //    private final ArrayList<Goal> currentGoals = new ArrayList<>();
@@ -21,6 +24,7 @@ public class MainViewModel extends AndroidViewModel {
     public MainViewModel(Application application){
         super(application);
         goalRepository = new GoalRepository(application);
+        projectRepository = new ProjectRepository(application);
         currentGoals = goalRepository.getCurrentGoals();
         allGoals = goalRepository.getAllGoals();
         cachedGoals = new ArrayList<>();
@@ -89,4 +93,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
 
+    public void addProject(Project project) {
+        projectRepository.addProject(project);
+    }
 }

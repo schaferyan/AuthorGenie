@@ -1,11 +1,13 @@
 package com.ryanschafer.authorgenie.ui.add;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,11 +15,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.ryanschafer.authorgenie.data.projects.Project;
 import com.ryanschafer.authorgenie.databinding.AddProjectFragmentBinding;
 import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
+import com.ryanschafer.authorgenie.ui.utils.Utils;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +35,7 @@ public class AddProjectFragment extends Fragment {
     private static final String NAME_EDITTEXT_KEY = "name edit text key";
     private static final String TARGET_EDITTEXT_KEY = "target edit text key";
     private static final String DATE_PICKER_KEY = "date picker key" ;
+    private long mDate;
 
     AddProjectFragmentBinding binding;
     MainViewModel mViewModel;
@@ -61,8 +68,16 @@ public class AddProjectFragment extends Fragment {
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-            mViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         binding = AddProjectFragmentBinding.inflate(inflater);
+        binding.dateEdittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    showDatePickerDialog();
+                }
+            }
+        });
 
         return binding.getRoot();
     }
@@ -94,7 +109,10 @@ public class AddProjectFragment extends Fragment {
         }
 
         try {
-
+            String name = binding.nameEdittext.getText().toString();
+            int target = Integer.parseInt(binding.targetEdittext.getText().toString().replaceAll("[^\\d]", ""));
+            long date = mDate;
+            mViewModel.addProject(new Project(name, target, date));
         }catch(NumberFormatException e){
             onInvalidInput();
             return false;
@@ -123,4 +141,28 @@ public class AddProjectFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
     }
+
+    public void showDatePickerDialog() {
+//        DialogFragment newFragment = new DatePickerDialogFragment();
+//        newFragment.show(getParentFragmentManager(), "datePicker");
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int  month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(),
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int month, int day) {
+                        String date = Utils.formatDate(year, month, day);
+                        binding.dateEdittext.setText(date);
+                        mDate = Utils.getLong(year, month, day);
+                    }
+                }, year, month, day);
+        datePickerDialog.show();
+    }
+
 }

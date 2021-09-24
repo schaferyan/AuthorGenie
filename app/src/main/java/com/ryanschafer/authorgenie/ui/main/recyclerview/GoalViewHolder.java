@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.R;
+import com.ryanschafer.authorgenie.ui.utils.Utils;
 
 import java.text.DateFormat;
 
@@ -35,9 +36,9 @@ public class GoalViewHolder extends RecyclerView.ViewHolder {
         String labelText = goal.getName();
         String dueDate;
         if(goal.dueToday()){
-            dueDate = DateFormat.getTimeInstance(DateFormat.SHORT).format(goal.getDeadlineAsDate());
+            dueDate = Utils.formatDate(goal.getDeadline());
         }else {
-            dueDate = DateFormat.getDateInstance(DateFormat.SHORT).format(goal.getDeadlineAsDate());
+            dueDate = Utils.formatTime(goal.getDeadline());
         }
 
         progressBar.setMax(max);

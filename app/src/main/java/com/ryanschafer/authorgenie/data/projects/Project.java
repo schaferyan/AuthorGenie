@@ -14,29 +14,25 @@ public class Project {
     private String name;
     private int wordGoalTotal;
     private int wordCountTotal;
-    private int timeCountTotal;
-    private int timeGoalTotal;
     private long deadline;
+    private boolean current;
 
 //    Use when recreating from database
-    public Project(int id, String name, int wordGoalTotal, int wordCountTotal, int timeCountTotal, int timeGoalTotal, long deadline) {
+    public Project(int id, String name, int wordGoalTotal, int wordCountTotal, long deadline, boolean current) {
         this.id = id;
         this.name = name;
         this.wordGoalTotal = wordGoalTotal;
         this.wordCountTotal = wordCountTotal;
-        this.timeCountTotal = timeCountTotal;
-        this.timeGoalTotal = timeGoalTotal;
         this.deadline = deadline;
+        this.current = current;
     }
 
 //    use when creating for the first time
     @Ignore
-    public Project(String name, int wordGoalTotal, int timeGoalTotal, long deadline) {
+    public Project(String name, int wordGoalTotal, long deadline) {
         this.name = name;
         this.wordGoalTotal = wordGoalTotal;
-        this.timeGoalTotal = timeGoalTotal;
         this.wordCountTotal = 0;
-        this.timeCountTotal = 0;
         this.deadline = deadline;
     }
 
@@ -56,14 +52,6 @@ public class Project {
         return wordCountTotal;
     }
 
-    public int getTimeCountTotal() {
-        return timeCountTotal;
-    }
-
-    public int getTimeGoalTotal() {
-        return timeGoalTotal;
-    }
-
     public long getDeadline() {
         return deadline;
     }
@@ -72,7 +60,7 @@ public class Project {
         this.wordCountTotal = wordCountTotal;
     }
 
-    public void setTimeCountTotal(int timeCountTotal) {
-        this.timeCountTotal = timeCountTotal;
+    public boolean isCurrent() {
+        return current;
     }
 }
