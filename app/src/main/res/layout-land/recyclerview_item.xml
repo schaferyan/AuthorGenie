@@ -10,7 +10,7 @@
     tools:ignore="RtlHardcoded">
 
     <TextView
-        android:id="@+id/goalLabelRecyclerview"
+        android:id="@+id/nameLabelRecyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -26,14 +26,14 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="150dp"
         android:layout_height="10dp"
-        android:layout_below="@id/goalLabelRecyclerview"
+        android:layout_below="@id/nameLabelRecyclerview"
         android:progressDrawable="@drawable/progressbar"
         android:layout_marginStart="@dimen/small_margin"
         />
 
 
     <TextView
-        android:id="@+id/goalDateRecyclerview"
+        android:id="@+id/dateLabelRecyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/progBarRecyclerview"

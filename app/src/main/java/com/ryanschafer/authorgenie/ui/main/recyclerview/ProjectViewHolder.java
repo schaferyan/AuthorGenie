@@ -9,47 +9,47 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.R;
+import com.ryanschafer.authorgenie.data.projects.Project;
 import com.ryanschafer.authorgenie.ui.utils.Utils;
 
-public class GoalViewHolder extends RecyclerView.ViewHolder {
+public class ProjectViewHolder extends RecyclerView.ViewHolder {
     private final ProgressBar progressBar;
     private final TextView numberView;
-    private final TextView goalLabel;
+    private final TextView projectLabel;
     private final TextView dateLabel;
 
-    public GoalViewHolder(@NonNull View itemView) {
+    public ProjectViewHolder(@NonNull View itemView) {
         super(itemView);
         progressBar = itemView.findViewById(R.id.progBarRecyclerview);
         numberView = itemView.findViewById(R.id.progressNumbersRecyclerview);
-        goalLabel = itemView.findViewById(R.id.nameLabelRecyclerview);
+        projectLabel = itemView.findViewById(R.id.nameLabelRecyclerview);
         dateLabel = itemView.findViewById(R.id.dateLabelRecyclerview);
     }
 
-    public void bind(Goal goal){
+    public void bind(Project project){
 
-        int max = goal.getObjective();
-        int progress = goal.getProgress();
-        String labelText = goal.getName();
+        int max = project.getWordGoalTotal();
+        int progress = project.getWordCountTotal();
+        String labelText = project.getName();
         String dueDate;
-        if(goal.dueToday()){
-            dueDate = Utils.formatDate(goal.getDeadline());
+        if(project.dueToday()){
+            dueDate = Utils.formatTime(project.getDeadline());
         }else {
-            dueDate = Utils.formatTime(goal.getDeadline());
+            dueDate = Utils.formatDate(project.getDeadline());
         }
 
         progressBar.setMax(max);
         progressBar.setProgress(progress);
         numberView.setText(progress + " / " + max);
-        goalLabel.setText(labelText);
+        projectLabel.setText(labelText);
         dateLabel.setText(dueDate);
     }
 
-    static GoalViewHolder create(ViewGroup parent) {
+    static ProjectViewHolder create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recyclerview_item, parent, false);
-        return new GoalViewHolder(view);
+        return new ProjectViewHolder(view);
     }
 
 

@@ -5,16 +5,18 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
 @Entity(tableName = "project_table")
 public class Project {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "primary_id")
     private int id;
-    private String name;
-    private int wordGoalTotal;
+    private final String name;
+    private final int wordGoalTotal;
     private int wordCountTotal;
-    private long deadline;
+    private final long deadline;
     private boolean current;
 
 //    Use when recreating from database
@@ -34,6 +36,7 @@ public class Project {
         this.wordGoalTotal = wordGoalTotal;
         this.wordCountTotal = 0;
         this.deadline = deadline;
+        this.current = deadline > Calendar.getInstance().getTimeInMillis();
     }
 
     public int getId() {
@@ -62,5 +65,17 @@ public class Project {
 
     public boolean isCurrent() {
         return current;
+    }
+
+    public boolean dueToday() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(deadline -1000);
+        int monthDue = calendar.get(Calendar.MONTH);
+        int dayDue = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+        return currentMonth == monthDue && currentDay == dayDue;
     }
 }

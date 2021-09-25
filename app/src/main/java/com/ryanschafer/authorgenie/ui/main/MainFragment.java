@@ -39,9 +39,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.ryanschafer.authorgenie.R;
+import com.ryanschafer.authorgenie.data.projects.Project;
 import com.ryanschafer.authorgenie.databinding.MainFragmentBinding;
 import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.ui.main.recyclerview.GoalListAdapter;
+import com.ryanschafer.authorgenie.ui.main.recyclerview.ProjectListAdapter;
 import com.ryanschafer.authorgenie.ui.main.recyclerview.SwipeToDeleteCallback;
 
 import org.jetbrains.annotations.NotNull;
@@ -58,7 +60,8 @@ public class MainFragment extends Fragment {
     public static String words_counted_key = words_counted_name;
     MainFragmentBinding binding;
     MainViewModel mViewModel;
-    GoalListAdapter adapter;
+    GoalListAdapter goalListAdapter;
+    ProjectListAdapter projectListAdapter;
     ArrayAdapter<String> spinnerAdapter;
     Button submitButton;
     Spinner entrySpinner;
@@ -146,6 +149,9 @@ public class MainFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 setButtonColor(buttonView, isChecked);
+                if(isChecked){
+                    binding.recyclerview.setAdapter(goalListAdapter);
+                }
             }
         });
 
@@ -153,6 +159,9 @@ public class MainFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 setButtonColor(buttonView, isChecked);
+                if(isChecked){
+                    binding.recyclerview.setAdapter(projectListAdapter);
+                }
             }
         });
     }
@@ -178,12 +187,14 @@ public class MainFragment extends Fragment {
 
     private void setUpRecyclerView(){
         RecyclerView recyclerView = binding.recyclerview;
-        adapter = new GoalListAdapter(new GoalListAdapter.GoalDiff());
-        recyclerView.setAdapter(adapter);
+        goalListAdapter = new GoalListAdapter(new GoalListAdapter.GoalDiff());
+        projectListAdapter = new ProjectListAdapter(new ProjectListAdapter.ProjectDiff());
+        recyclerView.setAdapter(goalListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         enableSwipeToDeleteAndUndo();
         mViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         mViewModel.getCurrentGoals().observe(getViewLifecycleOwner(), this::onDataSetChanged);
+        mViewModel.getCurrentProjects().observe(getViewLifecycleOwner(), this::onProjectDataSetChanged);
     }
 
     private void setUpEditText(){
@@ -267,8 +278,13 @@ public class MainFragment extends Fragment {
     }
 
     private void onDataSetChanged(List<Goal> goals) {
-        adapter.submitList(goals);
+        goalListAdapter.submitList(goals);
         boolean showAuthorGenieButton = goals.isEmpty();
+        setShowAuthorGenieButton(showAuthorGenieButton);
+    }
+    private void onProjectDataSetChanged(List<Project> projects) {
+        projectListAdapter.submitList(projects);
+        boolean showAuthorGenieButton = projects.isEmpty();
         setShowAuthorGenieButton(showAuthorGenieButton);
     }
 
@@ -283,7 +299,7 @@ public class MainFragment extends Fragment {
         super.onResume();
         cycleText();
         int words = mPreferences.getInt(words_counted_key, 0);
-        mViewModel.addProgress(words, Goal.TYPE.WORD, adapter.getCurrentList());
+        mViewModel.addProgress(words, Goal.TYPE.WORD, goalListAdapter.getCurrentList());
         mPreferences.edit().putInt(words_counted_key, 0).apply();
     }
 
@@ -296,10 +312,10 @@ public class MainFragment extends Fragment {
 
 
                 final int position = viewHolder.getBindingAdapterPosition();
-                final Goal selectedGoal = adapter.getGoal(position);
+                final Goal selectedGoal = goalListAdapter.getGoal(position);
 
                 mViewModel.removeGoal(selectedGoal);
-                if(adapter.getCurrentList().isEmpty()){
+                if(goalListAdapter.getCurrentList().isEmpty()){
                     setShowAuthorGenieButton(true);
                 }
 
@@ -339,8 +355,8 @@ public class MainFragment extends Fragment {
         if(progress != 0) {
             sounds[0] = R.raw.tinkle;
         }
-        mViewModel.addProgress(progress, inputType, adapter.getCurrentList());
-        List<Goal> metGoals = mViewModel.getUnannouncedMetGoals(adapter.getCurrentList());
+        mViewModel.addProgress(progress, inputType, goalListAdapter.getCurrentList());
+        List<Goal> metGoals = mViewModel.getUnannouncedMetGoals(goalListAdapter.getCurrentList());
 
         if(!metGoals.isEmpty()){
             sounds[1] = R.raw.success;

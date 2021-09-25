@@ -14,17 +14,16 @@ import java.util.List;
 public class MainViewModel extends AndroidViewModel {
     private final LiveData<List<Goal>> currentGoals;
     private final LiveData<List<Goal>> allGoals;
+    private final LiveData<List<Project>> currentProjects;
     private final GoalRepository goalRepository;
     private final ProjectRepository projectRepository;
     private List<Goal> cachedGoals;
-
-//    private final ArrayList<Goal> currentGoals = new ArrayList<>();
-
 
     public MainViewModel(Application application){
         super(application);
         goalRepository = new GoalRepository(application);
         projectRepository = new ProjectRepository(application);
+        currentProjects = projectRepository.getCurrentProjects();
         currentGoals = goalRepository.getCurrentGoals();
         allGoals = goalRepository.getAllGoals();
         cachedGoals = new ArrayList<>();
@@ -95,5 +94,9 @@ public class MainViewModel extends AndroidViewModel {
 
     public void addProject(Project project) {
         projectRepository.addProject(project);
+    }
+
+    public LiveData<List<Project>> getCurrentProjects() {
+        return currentProjects;
     }
 }
