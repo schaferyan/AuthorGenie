@@ -42,4 +42,6 @@ public class TextViewCarousel extends AppCompatTextView {
 
 
 
+
+
 }

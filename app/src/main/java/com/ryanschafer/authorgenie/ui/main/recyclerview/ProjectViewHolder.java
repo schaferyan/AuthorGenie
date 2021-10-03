@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.data.projects.Project;
-import com.ryanschafer.authorgenie.ui.utils.Utils;
+import com.ryanschafer.authorgenie.ui.utils.DateFormatting;
 
 public class ProjectViewHolder extends RecyclerView.ViewHolder {
     private final ProgressBar progressBar;
@@ -34,9 +34,9 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder {
         String labelText = project.getName();
         String dueDate;
         if(project.dueToday()){
-            dueDate = Utils.formatTime(project.getDeadline());
+            dueDate = DateFormatting.formatTime(project.getDeadline());
         }else {
-            dueDate = Utils.formatDate(project.getDeadline());
+            dueDate = DateFormatting.formatDate(project.getDeadline());
         }
 
         progressBar.setMax(max);

@@ -6,8 +6,10 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
+import com.ryanschafer.authorgenie.data.ProjectWithGoals;
 import com.ryanschafer.authorgenie.data.projects.Project;
 
 import java.util.List;
@@ -38,4 +40,10 @@ public interface ProjectDao {
     @Query("SELECT * FROM project_table WHERE current = 1")
     List<Project> getCurrentProjectsAsList();
 
+    @Transaction
+    @Query("SELECT * FROM project_table WHERE current = 1")
+    LiveData<List<ProjectWithGoals>> getProjectsWithGoals();
+
+    @Query("SELECT * FROM project_table WHERE defaultProject = 1 LIMIT 1")
+    LiveData<DefaultProject> getDefaultProject();
 }

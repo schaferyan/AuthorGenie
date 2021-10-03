@@ -3,13 +3,20 @@ package com.ryanschafer.authorgenie.ui.main.recyclerview;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import com.ryanschafer.authorgenie.data.goals.Goal;
+import com.ryanschafer.authorgenie.data.projects.Project;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GoalListAdapter extends ListAdapter<Goal, GoalViewHolder> {
-
+    boolean filter;
+    int project;
+    List<Goal> cachedGoals;
 
     public GoalListAdapter(@NonNull DiffUtil.ItemCallback<Goal> diffCallback) {
         super(diffCallback);
@@ -27,10 +34,14 @@ public class GoalListAdapter extends ListAdapter<Goal, GoalViewHolder> {
         holder.bind(current);
     }
 
+//    public Goal getGoal(int position) {
+//        return getCurrentList().get(position);
+//    }
 
 
-    public Goal getGoal(int position) {
-        return getCurrentList().get(position);
+    @Override
+    public Goal getItem(int position) {
+        return super.getItem(position);
     }
 
     public static class GoalDiff extends DiffUtil.ItemCallback<Goal> {

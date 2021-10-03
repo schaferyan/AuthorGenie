@@ -6,7 +6,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Utils {
+public class DateFormatting {
     public static String formatDate(Date date){
         return DateFormat.getDateInstance(DateFormat.SHORT).format(date);
     }

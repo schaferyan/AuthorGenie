@@ -59,12 +59,12 @@
             android:layout_height="48dp"
             android:layout_margin="16dp"
             android:backgroundTint="@color/teal_200"
-            app:layout_constraintBottom_toTopOf="@+id/goal_duration_spinner2"
+            app:layout_constraintBottom_toTopOf="@+id/project_spinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Spinner
-            android:id="@+id/goal_duration_spinner2"
+            android:id="@+id/project_spinner"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="16dp"

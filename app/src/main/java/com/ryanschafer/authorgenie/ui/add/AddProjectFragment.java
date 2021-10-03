@@ -19,7 +19,7 @@ import com.ryanschafer.authorgenie.data.projects.Project;
 import com.ryanschafer.authorgenie.databinding.AddProjectFragmentBinding;
 import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
-import com.ryanschafer.authorgenie.ui.utils.Utils;
+import com.ryanschafer.authorgenie.ui.utils.DateFormatting;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -157,9 +157,9 @@ public class AddProjectFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int month, int day) {
-                        String date = Utils.formatDate(year, month, day);
+                        String date = DateFormatting.formatDate(year, month, day);
                         binding.dateEdittext.setText(date);
-                        mDate = Utils.getLong(year, month, day);
+                        mDate = DateFormatting.getLong(year, month, day);
                     }
                 }, year, month, day);
         datePickerDialog.show();

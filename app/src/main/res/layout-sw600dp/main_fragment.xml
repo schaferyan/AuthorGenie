@@ -70,26 +70,26 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95">
+        app:layout_constraintVertical_bias="0.7">
 
         <EditText
             android:id="@+id/enterProgressEditText"
             android:layout_width="220dp"
             android:layout_height="70dp"
-            android:hint="@string/progress_hint"
-            android:textAlignment="center"
             android:gravity="center"
+            android:hint="@string/progress_hint"
             android:importantForAutofill="no"
             android:inputType="number"
             android:paddingHorizontal="@dimen/smallPadding"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColorHint="@color/black"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/spinnerWrapper"
+        android:id="@+id/entryTypeSpinnerWrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/progress_input_background"
@@ -99,12 +99,31 @@
         app:layout_constraintHorizontal_bias="0.1">
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/entryTypeSpinner"
             android:layout_width="220dp"
             android:layout_height="70dp"
             android:paddingHorizontal="@dimen/smallPadding"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/projectSpinnerWrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/progress_input_background"
+        app:layout_constraintBottom_toTopOf="@+id/addProgressButton"
+        app:layout_constraintTop_toBottomOf="@id/entryTypeSpinnerWrapper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.1">
+
+        <Spinner
+            android:id="@+id/projectSpinner"
+            android:layout_width="220dp"
+            android:layout_height="70dp"
+            android:paddingHorizontal="@dimen/smallPadding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </RelativeLayout>
 
     <Button
@@ -116,7 +135,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerWrapper"
+        app:layout_constraintEnd_toEndOf="@+id/entryTypeSpinnerWrapper"
         app:layout_constraintStart_toStartOf="@+id/editTextWrapper"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.952" />
@@ -127,6 +146,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="500dp" />
+
+    <Spinner
+        android:id="@+id/recViewSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerview"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

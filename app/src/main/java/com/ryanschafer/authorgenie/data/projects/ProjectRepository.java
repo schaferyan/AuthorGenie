@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.ryanschafer.authorgenie.data.AGDatabase;
+import com.ryanschafer.authorgenie.data.ProjectWithGoals;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,14 +16,11 @@ public class ProjectRepository {
 
 
     private final ProjectDao projectDao;
-    private final LiveData<List<Project>> projects;
-    private final LiveData<List<Project>> allProjects;
+
 
     public ProjectRepository(Application application){
         AGDatabase db = AGDatabase.getInstance(application);
         projectDao = db.projectDao();
-        projects = projectDao.getCurrentProjects();
-        allProjects = projectDao.getAllProjects();
     }
 
     public void addProject(@NotNull Project project){
@@ -32,7 +30,7 @@ public class ProjectRepository {
     }
 
     public LiveData<List<Project>> getCurrentProjects() {
-        return projects;
+        return projectDao.getCurrentProjects();
     }
 
     public void updateProject(Project project) {
@@ -55,10 +53,14 @@ public class ProjectRepository {
 
 
     public LiveData<List<Project>> getAllProjects() {
-        return allProjects;
+        return projectDao.getAllProjects();
     }
 
     public void delete(Project project) {
         AGDatabase.dbWriteExecutor.execute(()-> projectDao.delete(project));
+    }
+
+    public LiveData<DefaultProject> getDefaultProject() {
+        return projectDao.getDefaultProject();
     }
 }
