@@ -87,4 +87,6 @@
     <string name="create_a_project_instructions">Create a project to keep track of your work</string>
     <string name="new_goal">New Goal</string>
     <string name="new_project">New Project</string>
+    <string name="new_">New</string>
+    <string name="toast_no_decrease">Your total can only be increased, not diminished!</string>
 </resources>

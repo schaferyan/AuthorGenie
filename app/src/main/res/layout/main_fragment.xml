@@ -39,8 +39,8 @@
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent=".5"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".5" />
 
 
     <TextView
@@ -48,9 +48,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/big_margin"
+        android:background="@color/purple_dark"
         android:padding="@dimen/smallPadding"
         android:text="@string/main_instructions"
-        android:background="@color/purple_dark"
         android:textColor="@color/white"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/editTextWrapper"
@@ -94,8 +94,8 @@
         android:background="@drawable/progress_input_background"
         app:layout_constraintBottom_toBottomOf="@+id/editTextWrapper"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.1">
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="@+id/guideline2">
 
         <Spinner
             android:id="@+id/entryTypeSpinner"
@@ -111,10 +111,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/progress_input_background"
         app:layout_constraintBottom_toTopOf="@+id/addProgressButton"
-        app:layout_constraintTop_toBottomOf="@id/entryTypeSpinnerWrapper"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.1">
+        app:layout_constraintTop_toBottomOf="@id/entryTypeSpinnerWrapper">
 
         <Spinner
             android:id="@+id/projectSpinner"
@@ -162,13 +162,13 @@
         android:id="@+id/authorGenieButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="@string/link_to_website_text"
-        android:textColor="@color/purple_light"
-        android:textAlignment="center"
         android:gravity="center"
+        android:minHeight="48dp"
+        android:text="@string/link_to_website_text"
+        android:textAlignment="center"
+        android:textColor="@color/purple_light"
         app:layout_constraintBottom_toBottomOf="@id/recyclerview"
         app:layout_constraintEnd_toEndOf="@+id/recyclerview"
         app:layout_constraintStart_toStartOf="@id/recyclerview"
@@ -178,13 +178,13 @@
         android:id="@+id/newGoalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/big_padding"
         android:clickable="true"
         android:contentDescription="@string/add_a_goal"
         android:focusable="true"
-        app:srcCompat="@drawable/ic_outline_add_24"
+        android:padding="@dimen/big_padding"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_outline_add_24" />
 
     <ToggleButton
         android:id="@+id/toggleButton"
@@ -217,16 +217,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/toggleButton2" />
 
-    <androidx.appcompat.widget.SwitchCompat
+    <RadioGroup
         android:id="@+id/switch1"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/entry_mode"
-        android:textOff="@string/new_label"
-        android:textOn="@string/total"
-        app:layout_constraintEnd_toEndOf="@+id/editTextWrapper"
+        app:layout_constraintBottom_toTopOf="@+id/addProgressButton"
         app:layout_constraintStart_toStartOf="@+id/editTextWrapper"
-        app:layout_constraintTop_toBottomOf="@+id/editTextWrapper" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextWrapper">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:checked="true"
+            android:id="@+id/radio_new"
+            android:text="@string/new_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:checked="false"
+            android:id="@+id/radio_total"
+            android:text="@string/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

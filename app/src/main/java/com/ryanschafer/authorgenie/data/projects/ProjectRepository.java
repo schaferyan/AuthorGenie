@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.ryanschafer.authorgenie.data.AGDatabase;
-import com.ryanschafer.authorgenie.data.ProjectWithGoals;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -63,4 +62,6 @@ public class ProjectRepository {
     public LiveData<DefaultProject> getDefaultProject() {
         return projectDao.getDefaultProject();
     }
+
+
 }

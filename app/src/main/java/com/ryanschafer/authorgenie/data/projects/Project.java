@@ -1,34 +1,39 @@
 package com.ryanschafer.authorgenie.data.projects;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.ryanschafer.authorgenie.data.AGItem;
+import com.ryanschafer.authorgenie.data.goals.Goal;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 
 @Entity(tableName = "project_table")
-public class Project {
+public class Project implements AGItem {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "primary_id")
     private int id;
     private String name;
-    private int wordGoalTotal;
-    private int wordCountTotal;
+    private int wordGoal;
+    private int wordCount;
+    private int timeCount;
     private long deadline;
     private boolean current;
-    private boolean defaultProject;
+    private boolean defaultProject = false;
 
 //    Use when recreating from database
     public Project(int id, String name, int wordGoalTotal, int wordCountTotal, long deadline, boolean current) {
         this.id = id;
         this.name = name;
-        this.wordGoalTotal = wordGoalTotal;
-        this.wordCountTotal = wordCountTotal;
+        this.wordGoal = wordGoalTotal;
+        this.wordCount = wordCountTotal;
         this.deadline = deadline;
         this.current = current;
     }
@@ -37,17 +42,17 @@ public class Project {
     @Ignore
     public Project(String name, int wordGoalTotal, long deadline) {
         this.name = name;
-        this.wordGoalTotal = wordGoalTotal;
-        this.wordCountTotal = 0;
+        this.wordGoal = wordGoalTotal;
+        this.wordCount = 0;
         this.deadline = deadline;
         this.current = deadline > Calendar.getInstance().getTimeInMillis();
     }
     @Ignore
-    public Project(String name, boolean defaultProject) {
+    protected Project(String name, boolean defaultProject) {
         this.name = name;
         this.current = true;
         this.defaultProject = defaultProject;
-        wordGoalTotal = 0;
+        wordGoal = 0;
         deadline = 0;
     }
 
@@ -68,20 +73,20 @@ public class Project {
         this.name = name;
     }
 
-    public int getWordGoalTotal() {
-        return wordGoalTotal;
+    public int getWordGoal() {
+        return wordGoal;
     }
 
-    public int getWordCountTotal() {
-        return wordCountTotal;
+    public int getWordCount() {
+        return wordCount;
     }
 
     public long getDeadline() {
         return deadline;
     }
 
-    public void setWordCountTotal(int wordCountTotal) {
-        this.wordCountTotal = wordCountTotal;
+    public void setWordCount(int wordCount) {
+        this.wordCount = wordCount;
     }
 
     public boolean isCurrent() {
@@ -113,8 +118,8 @@ public class Project {
         this.defaultProject = defaultProject;
     }
 
-    public void setWordGoalTotal(int wordGoalTotal) {
-        this.wordGoalTotal = wordGoalTotal;
+    public void setWordGoal(int wordGoal) {
+        this.wordGoal = wordGoal;
     }
 
     public void setDeadline(long deadline) {
@@ -123,5 +128,31 @@ public class Project {
 
     public void setCurrent(boolean current) {
         this.current = current;
+    }
+
+    public int getTimeCount() {
+        return timeCount;
+    }
+
+    public void setTimeCount(int timeCount) {
+        this.timeCount = timeCount;
+    }
+
+    public void addProgress(int progress, Goal.TYPE inputType) {
+        if(inputType == Goal.TYPE.WORD ){
+            setWordCount(wordCount + progress);
+        }else if(inputType == Goal.TYPE.TIME){
+            setTimeCount(timeCount + progress);
+        }
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(!(obj instanceof Project)){
+            return false;
+        }
+        Project proj = (Project)obj;
+        return  id == proj.getId() && wordCount == proj.getWordCount()
+                && wordGoal == proj.getWordGoal() && timeCount == proj.getTimeCount();
     }
 }

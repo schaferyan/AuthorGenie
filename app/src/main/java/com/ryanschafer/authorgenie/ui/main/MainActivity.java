@@ -15,9 +15,7 @@ import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -25,24 +23,21 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-
-import com.ryanschafer.authorgenie.background.AlarmReceiver;
 import com.ryanschafer.authorgenie.R;
+import com.ryanschafer.authorgenie.background.AlarmReceiver;
+import com.ryanschafer.authorgenie.background.GoalStatusHandlerThread;
 import com.ryanschafer.authorgenie.databinding.MainActivityBinding;
-import com.ryanschafer.authorgenie.ui.settings.SettingsFragment;
-import com.ryanschafer.authorgenie.ui.statistics.GraphFragment;
 import com.ryanschafer.authorgenie.ui.about.About;
 import com.ryanschafer.authorgenie.ui.add.AddTabManagerFragment;
-import com.ryanschafer.authorgenie.background.GoalStatusHandlerThread;
+import com.ryanschafer.authorgenie.ui.settings.SettingsFragment;
+import com.ryanschafer.authorgenie.ui.statistics.GraphFragment;
+import com.ryanschafer.authorgenie.ui.utils.ViewUtils;
 import com.ryanschafer.authorgenie.ui.wordprocessor.ScrollingEditTextActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -102,8 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 new ViewModelProvider.AndroidViewModelFactory(getApplication()))
                 .get(MainViewModel.class);
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-        handleInsets(root);
+        ViewUtils.handleSystemBarInsets(root, false);
         createNotificationChannel();
         scheduleAlarms();
         setupToolbar();
@@ -182,15 +176,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void handleInsets(View root){
-        ViewCompat.setOnApplyWindowInsetsListener(root, (v, windowInsets) -> {
-            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-            mlp.topMargin = insets.top;
-            v.setLayoutParams(mlp);
-            return windowInsets;
-        });
-    }
+
+
 
     private void manageFragments(Bundle savedInstanceState){
         showDashboardFragment();

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "eec1b47aa0082539a3873c868563cb2d",
+    "identityHash": "3d13b1a57c4801a135afe8c63ee88ea3",
     "entities": [
       {
         "tableName": "goal_table",
@@ -80,7 +80,7 @@
       },
       {
         "tableName": "project_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`primary_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `wordGoalTotal` INTEGER NOT NULL, `wordCountTotal` INTEGER NOT NULL, `deadline` INTEGER NOT NULL, `current` INTEGER NOT NULL, `defaultProject` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`primary_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `wordGoal` INTEGER NOT NULL, `wordCount` INTEGER NOT NULL, `timeCount` INTEGER NOT NULL, `deadline` INTEGER NOT NULL, `current` INTEGER NOT NULL, `defaultProject` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -95,14 +95,20 @@
             "notNull": false
           },
           {
-            "fieldPath": "wordGoalTotal",
-            "columnName": "wordGoalTotal",
+            "fieldPath": "wordGoal",
+            "columnName": "wordGoal",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "wordCountTotal",
-            "columnName": "wordCountTotal",
+            "fieldPath": "wordCount",
+            "columnName": "wordCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeCount",
+            "columnName": "timeCount",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -133,12 +139,50 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "ProjectSnapshot",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `wordCount` INTEGER NOT NULL, `wordGoal` INTEGER NOT NULL, `timeCount` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wordCount",
+            "columnName": "wordCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wordGoal",
+            "columnName": "wordGoal",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeCount",
+            "columnName": "timeCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'eec1b47aa0082539a3873c868563cb2d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3d13b1a57c4801a135afe8c63ee88ea3')"
     ]
   }
 }

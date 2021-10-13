@@ -1,4 +1,4 @@
-package com.ryanschafer.authorgenie.ui.main;
+package com.ryanschafer.authorgenie.ui.utils;
 
 import android.content.Context;
 import android.view.GestureDetector;

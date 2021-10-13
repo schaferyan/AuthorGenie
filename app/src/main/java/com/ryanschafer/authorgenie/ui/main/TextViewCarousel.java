@@ -6,14 +6,20 @@ import android.view.MotionEvent;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
-public class TextViewCarousel extends AppCompatTextView {
+import com.ryanschafer.authorgenie.ui.utils.OnSwipeTouchListener;
 
+import java.util.Random;
+
+public class TextViewCarousel extends AppCompatTextView {
+    private String[] strings;
     public TextViewCarousel(Context context) {
         super(context);
+        setOnTouchListener(new CarouselSwipeListener(context));
     }
 
     public TextViewCarousel(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setOnTouchListener(new CarouselSwipeListener(context));
     }
 
     @Override
@@ -39,9 +45,33 @@ public class TextViewCarousel extends AppCompatTextView {
         return true;
     }
 
+    public void cycleText() {
+        if(strings != null) {
+            Random random = new Random();
+            int index = random.nextInt(strings.length);
+            String text = strings[index];
+            setText(text);
+        }
+    }
 
+    public void setStrings(String[] strings) {
+        this.strings = strings;
+    }
 
+    public class CarouselSwipeListener extends OnSwipeTouchListener {
+        public CarouselSwipeListener(Context context) {
+            super(context);
+        }
 
-
-
+        @Override
+        public void onSwipeLeft() {
+            super.onSwipeLeft();
+            cycleText();
+        }
+        @Override
+        public void onSwipeRight() {
+            super.onSwipeLeft();
+            cycleText();
+        }
+    }
 }

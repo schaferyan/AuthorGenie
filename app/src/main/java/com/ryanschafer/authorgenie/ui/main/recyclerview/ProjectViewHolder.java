@@ -7,13 +7,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.ryanschafer.authorgenie.R;
 import com.ryanschafer.authorgenie.data.projects.Project;
 import com.ryanschafer.authorgenie.ui.utils.DateFormatting;
 
-public class ProjectViewHolder extends RecyclerView.ViewHolder {
+public class ProjectViewHolder extends AGViewHolder<Project> {
     private final ProgressBar progressBar;
     private final TextView numberView;
     private final TextView projectLabel;
@@ -29,8 +28,8 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(Project project){
 
-        int max = project.getWordGoalTotal();
-        int progress = project.getWordCountTotal();
+        int max = project.getWordGoal();
+        int progress = project.getWordCount();
         String labelText = project.getName();
         String dueDate;
         if(project.dueToday()){

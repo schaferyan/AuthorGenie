@@ -67,8 +67,6 @@ public class GoalStatusHandlerThread extends HandlerThread {
     }
     private void showToast(String message){
             Handler mainHandler = new Handler(context.getMainLooper());
-
-        // This is your code
         Runnable myRunnable = () -> Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             mainHandler.post(myRunnable);
     }

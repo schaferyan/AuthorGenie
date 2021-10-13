@@ -7,13 +7,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.R;
+import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.ui.utils.DateFormatting;
 
-public class GoalViewHolder extends RecyclerView.ViewHolder {
+public class GoalViewHolder extends AGViewHolder<Goal> {
     private final ProgressBar progressBar;
     private final TextView numberView;
     private final TextView goalLabel;
