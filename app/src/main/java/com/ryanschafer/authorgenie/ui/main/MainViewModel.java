@@ -1,18 +1,17 @@
 package com.ryanschafer.authorgenie.ui.main;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.ryanschafer.authorgenie.data.AGItem;
-import com.ryanschafer.authorgenie.data.projects.ProjectSnapshot;
 import com.ryanschafer.authorgenie.data.goals.Goal;
 import com.ryanschafer.authorgenie.data.goals.GoalRepository;
 import com.ryanschafer.authorgenie.data.projects.Project;
 import com.ryanschafer.authorgenie.data.projects.ProjectRepository;
+import com.ryanschafer.authorgenie.data.projects.ProjectSnapshot;
 import com.ryanschafer.authorgenie.data.projects.SnapshotRepository;
 
 import java.util.ArrayList;
@@ -131,8 +130,9 @@ public class MainViewModel extends AndroidViewModel {
         return cachedGoals;
     }
 
-    public void cacheGoals(List<Goal> cachedGoals) {
-        this.cachedGoals.addAll(cachedGoals);
+    public void cacheGoals(List<Goal> goals) {
+        this.cachedGoals.clear();
+        this.cachedGoals.addAll(goals);
     }
 
 
@@ -159,10 +159,12 @@ public class MainViewModel extends AndroidViewModel {
 
     public void removeProject(Project project) {
 //        projectRepository.delete(project);
+        removeProjectGoals(project);
         project.setCurrent(false);
         projectRepository.updateProject(project);
         removeProjectGoals(project);
     }
+
     public void removeProjectGoals(Project project){
         for(Goal goal: cachedGoals){
             if(goal.getProjectId() == project.getId()) {
@@ -183,9 +185,10 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void removeItem(AGItem item) {
-        item.setCurrent(false);
         if(item instanceof Project){
-            removeProjectGoals((Project) item);
+            removeProject((Project) item);
+        }else if(item instanceof Goal){
+            removeGoal((Goal) item);
         }
     }
 
@@ -230,62 +233,27 @@ public class MainViewModel extends AndroidViewModel {
         }
     }
 
-    public List<Project> getCachedProjects() {
-        return cachedProjects;
+    public void onProjectDataChanged(List<Project> projects){
+        makeSnapshots(projects);
+        cacheProjects(projects);
     }
 
-    public void cacheProjects(List<Project> cachedProjects) {
-        this.cachedProjects.addAll(cachedProjects);
+    private void cacheProjects(List<Project> projects) {
+        cachedProjects.clear();
+        cachedProjects.addAll(projects);
     }
 
-    public void makeSnapshots(Context context,  List<Project> projects) {
-        List<Project>modProjects = new ArrayList<>(projects);
-
-//        find changed elements
+    private void makeSnapshots(List<Project> projects) {
+        List<Project> modProjects = new ArrayList<>(projects);
+//        find changed projects
         modProjects.removeAll(cachedProjects);
-        for(Project project : modProjects){
+//        store snapshots of changed projects
+        for (Project project : modProjects) {
             ProjectSnapshot snapshot = new ProjectSnapshot(project.getId(),
-                    project.getWordCount(), project.getWordGoal(), project.getTimeCount(), Calendar.getInstance().getTimeInMillis());
-            snapshotRepository.updateSnapshot(snapshot);
+                    project.getWordCount(), project.getWordGoal(), project.getTimeCount(),
+                    Calendar.getInstance().getTimeInMillis());
+            snapshotRepository.addSnapshot(snapshot);
+
         }
-
-////        add ids to array so we can pass them to Worker
-//        int[] arr = new int[modProjects.size()];
-//        for (int i = 0; i < modProjects.size(); i++) {
-//            arr[i] = modProjects.get(i).getId();
-//        }
-////        build work request, passing in our array of ids corresponding to changed projects
-//        WorkRequest workRequest = new OneTimeWorkRequest.Builder(
-//                ProjectSnaphotMaker.class)
-//                .setInputData(
-//                        new Data.Builder()
-//                                .putIntArray("MODIFIED_PROJECT_IDS", arr)
-//                                .build()
-//                )
-//                                .build();
-//
-//        WorkManager
-//                .getInstance(context)
-//                .enqueue(workRequest);
     }
-
-//    public class ProjectSnaphotMaker extends Worker{
-//
-//        public ProjectSnaphotMaker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
-//            super(context, workerParams);
-//        }
-//
-//        @NonNull
-//        @Override
-//        public Result doWork() {
-//            int[] ids = getInputData().getIntArray("MODIFIED_PROJECT_IDS");
-//            if(ids == null){
-//                return Result.failure();
-//            }
-//            for (int id: ids) {
-//                snapshotRepository.update
-//            }
-//            return Result.success();
-//        }
-//    }
 }

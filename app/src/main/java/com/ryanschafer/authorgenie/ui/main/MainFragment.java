@@ -196,10 +196,7 @@ public class MainFragment extends Fragment {
         mViewModel.cacheGoals(goals);
     }
     private void onProjectDataSetChanged(List<Project> projects) {
-//        ensure cacheProjects always follows makeSnapshots
-        mViewModel.makeSnapshots(requireContext(), projects);
-        mViewModel.cacheProjects(projects);
-
+        mViewModel.onProjectDataChanged(projects);
         projAdapter.clear();
         projAdapter.addAll(projects);
         List<Project> userProjects = new ArrayList<>(projects);

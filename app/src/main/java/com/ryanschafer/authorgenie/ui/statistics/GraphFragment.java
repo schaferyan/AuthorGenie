@@ -1,6 +1,12 @@
 package com.ryanschafer.authorgenie.ui.statistics;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,14 +16,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import com.github.mikephil.charting.charts.LineChart;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -27,8 +27,8 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.ryanschafer.authorgenie.R;
-import com.ryanschafer.authorgenie.databinding.FragmentGraphBinding;
 import com.ryanschafer.authorgenie.data.goals.Goal;
+import com.ryanschafer.authorgenie.databinding.FragmentGraphBinding;
 import com.ryanschafer.authorgenie.ui.main.MainViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -185,7 +185,7 @@ public class GraphFragment extends Fragment {
     };
 
     private void populateGraph(List<Goal> goals) {
-        mViewModel.setCachedGoals(goals);
+        mViewModel.cacheGoals(goals);
         int typeId = Goal.getGoalTypeId(binding.typeSpinner2.getSelectedItemPosition(),
                 binding.durationSpinner2.getSelectedItemPosition());
 

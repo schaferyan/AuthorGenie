@@ -14,6 +14,10 @@ public class SnapshotRepository {
     }
 
     public void updateSnapshot(ProjectSnapshot snapshot) {
-        snapshotDao.update(snapshot);
+        AGDatabase.dbWriteExecutor.execute(()->snapshotDao.update(snapshot));
+    }
+
+    public void addSnapshot(ProjectSnapshot snapshot){
+        AGDatabase.dbWriteExecutor.execute(()->snapshotDao.insert(snapshot));
     }
 }

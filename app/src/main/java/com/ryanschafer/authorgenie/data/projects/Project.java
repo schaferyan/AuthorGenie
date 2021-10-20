@@ -29,20 +29,20 @@ public class Project implements AGItem {
     private boolean defaultProject = false;
 
 //    Use when recreating from database
-    public Project(int id, String name, int wordGoalTotal, int wordCountTotal, long deadline, boolean current) {
+    public Project(int id, String name, int wordGoal, int wordCount, long deadline, boolean current) {
         this.id = id;
         this.name = name;
-        this.wordGoal = wordGoalTotal;
-        this.wordCount = wordCountTotal;
+        this.wordGoal = wordGoal;
+        this.wordCount = wordCount;
         this.deadline = deadline;
         this.current = current;
     }
 
 //    use when creating for the first time
     @Ignore
-    public Project(String name, int wordGoalTotal, long deadline) {
+    public Project(String name, int wordGoal, long deadline) {
         this.name = name;
-        this.wordGoal = wordGoalTotal;
+        this.wordGoal = wordGoal;
         this.wordCount = 0;
         this.deadline = deadline;
         this.current = deadline > Calendar.getInstance().getTimeInMillis();

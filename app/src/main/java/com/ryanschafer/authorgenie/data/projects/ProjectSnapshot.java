@@ -1,25 +1,35 @@
 package com.ryanschafer.authorgenie.data.projects;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class ProjectSnapshot {
-    @PrimaryKey
-    private final int id;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    private final int project;
     private final int wordCount;
     private final int wordGoal;
     private final int timeCount;
+    private final long date;
 
-    public ProjectSnapshot(int id, int wordCountTotal, int wordGoalTotal, int timeCountTotal, long date) {
-    this.id = id;
-    this.wordCount = wordCountTotal;
-    this.wordGoal = wordGoalTotal;
-    this.timeCount = timeCountTotal;
+    public ProjectSnapshot(int id, int project, int wordCount, int wordGoal, int timeCount, long date) {
+        this.id = id;
+        this.project = project;
+        this.wordCount = wordCount;
+        this.wordGoal = wordGoal;
+        this.timeCount = timeCount;
+        this.date = date;
     }
-    public boolean equalToProject(Project project){
-        return id == project.getId() && wordCount == project.getWordCount()
-                && wordGoal == project.getWordGoal() && timeCount == project.getTimeCount();
+
+    @Ignore
+    public ProjectSnapshot(int project, int wordCount, int wordGoal, int timeCount, long date) {
+    this.project = project;
+    this.wordCount = wordCount;
+    this.wordGoal = wordGoal;
+    this.timeCount = timeCount;
+    this.date = date;
     }
 
     public int getId() {
@@ -37,4 +47,13 @@ public class ProjectSnapshot {
     public int getTimeCount() {
         return timeCount;
     }
+
+    public long getDate() {
+        return date;
+    }
+
+    public int getProject() {
+        return project;
+    }
+
 }
