@@ -1,6 +1,6 @@
 # Author Genie App for Android
 
-This is an app to help writers set and track minute and wordcount goals over time. It includes a simple built-in text editor, and a prgoress graph in addition to an interface for adding writing projects/goals and updating achievements. 
+This is an app to help writers set and track minute and wordcount goals over time. It includes a simple built-in text editor, and a progress graph in addition to an interface for adding writing projects/goals and updating achievements. 
 
 ## Getting started
 
